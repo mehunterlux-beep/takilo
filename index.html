@@ -47,18 +47,7 @@ document.dispatchEvent(new Event('firebase-ready'));
   --shadow:0 2px 14px rgba(0,0,0,.08);--r:14px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.app-wrapper{max-width:480px;margin:0 auto;position:relative}
-@media(min-width:768px){
-  body{background:#e8f0e8}
-  .app-wrapper{max-width:480px;box-shadow:0 0 40px rgba(0,0,0,.15);min-height:100vh;background:var(--bg)}
-  .bot-nav{max-width:480px}
-  .toast{max-width:400px}
-}
-@media(min-width:1024px){
-  body{display:flex;justify-content:center;align-items:flex-start;padding:20px}
-  .app-wrapper{border-radius:20px;overflow:hidden;min-height:calc(100vh - 40px)}
-}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden}
 
 /* ===== VARIETY COLORS ===== */
 /* ทุเรียน — กรอบเหลืองเรืองแสง */
@@ -107,7 +96,7 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min
 .toast.warn{background:var(--or)}
 
 /* ===== HEADER ===== */
-.hdr{background:linear-gradient(135deg,var(--gd),var(--g));padding:13px 16px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50}
+.hdr{background:linear-gradient(135deg,var(--gd),var(--g));padding:13px 16px 16px;display:flex;align-items:center;gap:10px}
 .hdr-logo{font-family:'Kanit',sans-serif;font-size:22px;font-weight:900;color:var(--y);letter-spacing:1px;flex:1}
 .hdr-logo span{font-size:12px;font-weight:400;color:rgba(255,255,255,.65);display:block;margin-top:1px}
 .hdr-avatar{width:36px;height:36px;border-radius:50%;border:2px solid var(--y);object-fit:cover;cursor:pointer;display:none}
@@ -117,7 +106,7 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min
 .notif-dot.on{display:block}
 
 /* ===== BOTTOM NAV ===== */
-.bot-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:white;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0 16px;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:100}
+.bot-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:white;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0 16px;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:100}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px;border:none;background:none}
 .nav-icon{font-size:22px}
 .nav-label{font-family:'Kanit',sans-serif;font-size:11px;font-weight:600;color:#bbb}
@@ -392,11 +381,80 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min
 .qdrag{width:40px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 14px}
 
 @media print{.hdr,.bot-nav,.back-btn,.act-row,.arow,.numpad,.gbtns,.vtabs,.blist-card,.info-bar,.sec-label,.btn-main,.btn-sec{display:none!important}}
+
+/* ===== TAB BUTTONS ===== */
+.tab-btn{background:#f5f5f5;border:none;color:var(--dim);font-family:'Kanit',sans-serif;font-size:13px;font-weight:700;padding:8px 16px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.tab-btn.on{background:var(--g);color:white}
+.tab-btn-yellow{background:var(--yl);border:2px solid var(--y)!important;color:var(--or)!important}
+.tab-btn-yellow.on{background:var(--y);color:var(--gd)!important}
+
+/* ===== CUTTER BOARD ===== */
+.cutter-card{background:white;border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden;border:2px solid #bbdefb}
+.cutter-hdr{background:linear-gradient(90deg,#1565c0,#1976d2);padding:10px 14px;display:flex;align-items:center;gap:10px}
+.cutter-name{font-family:'Kanit',sans-serif;font-weight:700;font-size:15px;color:white;flex:1}
+.cutter-type-badge{font-size:10px;font-weight:700;color:white;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:20px}
+.cutter-body{padding:10px 14px;font-size:13px;color:var(--dim);line-height:1.9}
+.work-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.work-tag{background:#e3f2fd;color:#1565c0;font-family:'Kanit',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.cutter-acts{padding:8px 14px;border-top:1px solid #f0f5ff;display:flex;gap:7px}
+
+/* ===== CONTRACT ===== */
+.contract-card{background:white;border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden;border:1px solid var(--border)}
+.contract-hdr{padding:10px 14px;border-bottom:1px solid #f5f5f5;display:flex;justify-content:space-between;align-items:flex-start}
+.contract-title{font-family:'Kanit',sans-serif;font-weight:700;font-size:14px}
+.contract-status{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;font-family:'Kanit',sans-serif;white-space:nowrap}
+.cs-open{background:#e8f5e9;color:var(--g)}
+.cs-negotiating{background:#fff3e0;color:var(--or)}
+.cs-signed{background:#e3f2fd;color:#1565c0}
+.cs-done{background:#f5f5f5;color:#aaa}
+.contract-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 14px}
+.ci-item{font-size:12px}
+.ci-label{color:var(--dim);display:block;margin-bottom:1px}
+.ci-val{font-family:'Kanit',sans-serif;font-weight:700;color:var(--text);font-size:13px}
+.contract-acts{padding:8px 14px;border-top:1px solid #f5f5f5;display:flex;gap:7px}
+.ca-btn{flex:1;padding:8px 4px;border-radius:8px;font-family:'Kanit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;text-align:center;border:1.5px solid}
+.ca-offer{background:#e8f5e9;border-color:var(--gl);color:var(--g)}
+.ca-detail{background:#e3f2fd;border-color:#2196f3;color:#1565c0}
+.ca-sign{background:var(--yl);border-color:var(--y);color:var(--or)}
+.ca-cancel{background:#fee;border-color:var(--re);color:var(--re)}
+.contract-signed-box{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--gl);border-radius:12px;padding:12px 14px;margin:8px 14px;text-align:center}
+.contract-signed-box .sig-title{font-family:'Kanit',sans-serif;font-weight:800;font-size:15px;color:var(--g)}
+.contract-signed-box .sig-sub{font-size:11px;color:var(--dim);margin-top:3px}
+
+/* ===== REVIEW MODAL ===== */
+.review-criteria{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.rc-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#fafafa;border-radius:10px;border:1px solid var(--border)}
+.rc-label{font-size:13px;font-weight:600;color:var(--text)}
+.star-row{display:flex;gap:3px}
+.star{font-size:24px;cursor:pointer;transition:transform .1s;user-select:none;color:#ddd;line-height:1}
+.star.on{color:#f5c518}
+.star:active{transform:scale(.85)}
+.rating-display{display:flex;align-items:center;gap:6px}
+.rating-avg{font-family:'Kanit',sans-serif;font-weight:900;font-size:28px;color:var(--text)}
+.rating-stars-sm{display:flex;gap:1px}
+.star-sm{font-size:14px;color:#f5c518}
+.rating-count{font-size:12px;color:var(--dim)}
+
+/* ===== ADMIN STATS ===== */
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+.stat-box{background:white;border-radius:12px;padding:14px;box-shadow:var(--shadow);border:1px solid var(--border);text-align:center}
+.stat-num{font-family:'Kanit',sans-serif;font-size:34px;font-weight:900;line-height:1;margin-bottom:4px}
+.stat-label{font-size:12px;color:var(--dim)}
+.online-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #f5f5f5;font-size:13px}
+.online-item:last-child{border-bottom:none}
+.online-dot{width:9px;height:9px;border-radius:50%;background:var(--gl);flex-shrink:0;box-shadow:0 0 6px rgba(76,175,80,.5)}
+.online-name{flex:1;font-weight:600}
+.online-time{font-size:11px;color:#aaa}
+.online-role{font-size:10px;color:white;font-family:'Kanit',sans-serif;font-weight:700;padding:1px 7px;border-radius:20px;background:var(--g)}
+
+
+.star-row{display:flex;gap:4px}
+.review-criteria-item{background:#fafafa;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
 </style>
 </head>
 <body>
 
-<div class="app-wrapper"><div class="loading" id="loading"><div class="spinner"></div><div class="loading-text">กำลังโหลด ตากิโล...</div></div>
+<div class="loading" id="loading"><div class="spinner"></div><div class="loading-text">กำลังโหลด ตากิโล...</div></div>
 
 <!-- LOGIN -->
 <div id="page-login" style="display:none">
@@ -715,6 +773,8 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min
       <div class="ig">
         <select id="user-role" onchange="saveRole()">
           <option value="สวน">🌳 คนสวน / คนขาย</option>
+          <option value="แผง">🏪 แผงรับซื้อ</option>
+          <option value="ล้ง">🏭 ล้ง (ส่งออก)</option>
           <option value="แม่ค้า">🛒 แม่ค้า / ผู้ซื้อต่อ</option>
         </select>
       </div>
@@ -727,10 +787,114 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min
   <nav class="bot-nav">
     <button class="nav-item on" id="nav-price" onclick="navTo('price')"><span class="nav-icon">💰</span><span class="nav-label">ราคา</span></button>
     <button class="nav-item" id="nav-map" onclick="navTo('map')"><span class="nav-icon">🗺️</span><span class="nav-label">แผนที่</span></button>
-    <button class="nav-item" id="nav-scale" onclick="navTo('scale')"><span class="nav-icon">⚖️</span><span class="nav-label">จดตาชั่ง</span></button>
-    <button class="nav-item" id="nav-admin" onclick="navTo('admin')" style="display:none"><span class="nav-icon">⚙️</span><span class="nav-label">แอดมิน</span></button>
+    <button class="nav-item" id="nav-contract" onclick="navTo('contract')"><span class="nav-icon">📋</span><span class="nav-label">สัญญา</span></button>
+    <button class="nav-item" id="nav-cutter" onclick="navTo('cutter')"><span class="nav-icon">✂️</span><span class="nav-label">สายตัด</span></button>
     <button class="nav-item" id="nav-profile" onclick="navTo('profile')"><span class="nav-icon">👤</span><span class="nav-label">ของฉัน</span></button>
   </nav>
+</div>
+
+<!-- PAGE: บอร์ดสายตัด -->
+<div class="page" id="pg-cutter">
+  <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:17px;color:#1565c0;margin-bottom:12px">✂️ บอร์ดทีมสายตัด</div>
+  <div style="font-size:12px;color:var(--dim);background:#e3f2fd;padding:10px 12px;border-radius:10px;margin-bottom:12px;line-height:1.7">
+    ทีมสายตัดคือกลุ่มที่รับจ้างตัด/ซื้อทุเรียนถึงสวน<br>คนสวนไม่ต้องนำทุเรียนมาขายเอง
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button onclick="cutterTab('board')" id="ct-board" class="tab-btn on">📋 ทีมที่รับงาน</button>
+    <button onclick="cutterTab('register')" id="ct-register" class="tab-btn">+ ลงทะเบียนทีม</button>
+  </div>
+  <div id="ct-board-content">
+    <div id="cutter-list"><div class="empty"><div class="empty-icon">✂️</div><div class="empty-text">ยังไม่มีทีมสายตัดในระบบ<br>กด "ลงทะเบียนทีม" เพื่อเริ่มต้น</div></div></div>
+  </div>
+  <div id="ct-register-content" style="display:none">
+    <div class="card">
+      <div class="ctitle">✂️ ลงทะเบียนทีมสายตัด</div>
+      <div class="ig" style="margin-bottom:8px"><label>ชื่อทีมสายตัด *</label><input id="ct-teamname" placeholder="เช่น ทีมสายตัดเนินสูง"></div>
+      <div class="irow">
+        <div class="ig"><label>ชื่อหัวหน้าทีม *</label><input id="ct-leader" placeholder="ชื่อ-นามสกุล"></div>
+        <div class="ig"><label>เบอร์โทร *</label><input id="ct-tel" placeholder="08x-xxx-xxxx" type="tel"></div>
+      </div>
+      <div class="irow">
+        <div class="ig"><label>จังหวัดที่รับงาน *</label>
+          <select id="ct-province">
+            <option value="จันทบุรี">จ.จันทบุรี</option>
+            <option value="ระยอง">จ.ระยอง</option>
+            <option value="ตราด">จ.ตราด</option>
+            <option value="ชุมพร">จ.ชุมพร</option>
+            <option value="สุราษฎร์ธานี">จ.สุราษฎร์ธานี</option>
+            <option value="หลายจังหวัด">หลายจังหวัด</option>
+          </select>
+        </div>
+        <div class="ig"><label>อำเภอที่รับงาน</label><input id="ct-district" placeholder="เช่น เขาคิชฌกูฏ, เมือง"></div>
+      </div>
+      <div class="ig" style="margin-bottom:8px">
+        <label>ประเภทงานที่รับ *</label>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;background:#f0f8ff;padding:6px 12px;border-radius:20px;border:1px solid #90caf9"><input type="checkbox" id="ct-w-cut" checked> ✂️ รับตัดทุเรียน</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;background:#f0fff0;padding:6px 12px;border-radius:20px;border:1px solid #a5d6a7"><input type="checkbox" id="ct-w-buy"> 💰 รับซื้อในสวน</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;background:#fff8e1;padding:6px 12px;border-radius:20px;border:1px solid #ffe082"><input type="checkbox" id="ct-w-carry"> 🚛 รับขนส่ง</label>
+        </div>
+      </div>
+      <div class="ig" style="margin-bottom:8px"><label>ราคารับตัด / เงื่อนไข</label><input id="ct-price" placeholder="เช่น 3 บาท/กก. หรือ เหมาต้นละ 50 บาท"></div>
+      <div class="ig"><label>จำนวนคนในทีม</label><input id="ct-members" placeholder="เช่น 5 คน" type="number" inputmode="numeric"></div>
+    </div>
+    <button class="btn-main" onclick="submitCutterRegister()">📤 ส่งคำขอลงทะเบียน</button>
+    <div style="font-size:11px;color:var(--dim);text-align:center;margin-top:8px;line-height:1.6">แอดมินจะตรวจสอบและอนุมัติภายใน 24-48 ชั่วโมง</div>
+  </div>
+</div>
+
+<!-- PAGE: สัญญาในสวน -->
+<div class="page" id="pg-contract">
+  <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:17px;color:var(--g);margin-bottom:12px">📋 สัญญาในสวน</div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px">
+    <button onclick="contractTab('market')" id="con-market" class="tab-btn on">🌳 ประกาศขายสวน</button>
+    <button onclick="contractTab('mine')" id="con-mine" class="tab-btn">📄 สัญญาของฉัน</button>
+    <button onclick="contractTab('new')" id="con-new" class="tab-btn tab-btn-yellow">+ ประกาศขาย</button>
+  </div>
+
+  <div id="con-market-content">
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">สวนทุเรียนที่เปิดรับข้อเสนอจากล้ง/สายตัด</div>
+    <div id="contract-market-list"><div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศขาย</div></div></div>
+  </div>
+
+  <div id="con-mine-content" style="display:none">
+    <div id="my-contracts-list"><div class="empty"><div class="empty-icon">📄</div><div class="empty-text">ยังไม่มีสัญญาของคุณ</div></div></div>
+  </div>
+
+  <div id="con-new-content" style="display:none">
+    <div class="card">
+      <div class="ctitle">🌳 ประกาศขายทุเรียนในสวน</div>
+      <div class="ig" style="margin-bottom:8px"><label>ชื่อเจ้าของสวน *</label><input id="con-owner" placeholder="ชื่อ-นามสกุล (ต้องตรงกับตัวจริง)"></div>
+      <div class="ig" style="margin-bottom:8px"><label>เบอร์โทรติดต่อ *</label><input id="con-tel" placeholder="08x-xxx-xxxx" type="tel"></div>
+      <div class="irow">
+        <div class="ig"><label>พันธุ์หลัก</label>
+          <select id="con-variety">
+            <option>หมอนทอง</option><option>ชะนี</option><option>กระดุม</option>
+            <option>นกหยิบ</option><option>มูซังคิง</option><option>ก้านยาว</option><option>อื่นๆ</option>
+          </select>
+        </div>
+        <div class="ig"><label>ปริมาณคาดการณ์ (กก.)</label><input id="con-amount" placeholder="5000" type="number" inputmode="numeric"></div>
+      </div>
+      <div class="irow">
+        <div class="ig"><label>ช่วงเก็บเกี่ยว</label><input id="con-harvest" placeholder="เช่น ก.ค. 2569"></div>
+        <div class="ig"><label>ราคาที่คาดหวัง (บาท/กก.)</label><input id="con-expect-price" placeholder="120" type="number" inputmode="numeric"></div>
+      </div>
+      <div class="ig" style="margin-bottom:8px"><label>ที่ตั้งสวน (อำเภอ/จังหวัด) *</label><input id="con-location" placeholder="เช่น อ.เขาคิชฌกูฏ จ.จันทบุรี"></div>
+      <div class="ig" style="margin-bottom:8px"><label>เงินมัดจำที่ต้องการ (บาท)</label><input id="con-deposit" placeholder="50000" type="number" inputmode="numeric"></div>
+      <div class="ig"><label>รายละเอียดเพิ่มเติม</label><textarea id="con-note" rows="2" placeholder="เช่น สวน 10 ไร่ ทุเรียนอายุ 10 ปี..."></textarea></div>
+    </div>
+    <div class="card" style="background:#fff9e0;border-color:var(--y)">
+      <div style="font-size:12px;color:#5c3d11;line-height:1.9">
+        ⚠️ <strong>ข้อตกลงการใช้บริการ</strong><br>
+        • ระบบนี้เป็นตัวกลางบันทึกข้อตกลงเบื้องต้น<br>
+        • 1 สวน = 1 สัญญาที่ active เท่านั้น<br>
+        • ป้องกันการทำสัญญาซ้ำซ้อนกับหลายผู้ซื้อ<br>
+        • ข้อตกลงขั้นสุดท้ายต้องทำกระดาษอีกครั้ง
+      </div>
+    </div>
+    <button class="btn-main" onclick="submitContractListing()">📤 ประกาศขาย</button>
+    <button class="btn-sec" onclick="contractTab('market')">ยกเลิก</button>
+  </div>
 </div>
 
 <!-- POST MODAL -->
@@ -792,7 +956,6 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min
 </div>
 
 <div class="toast" id="toast"></div>
-</div><!-- end app-wrapper -->
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -897,21 +1060,14 @@ function showApp(user) {
   document.getElementById('r-date').value = now.toISOString().split('T')[0];
 
   // Super admin
-  const isAdmin = currentUser.uid === SUPER_ADMIN_UID;
-  window._isAdmin = isAdmin;
-  if (isAdmin) {
+  if (currentUser.uid === SUPER_ADMIN_UID) {
     document.getElementById('notif-btn').style.display = 'flex';
-    document.getElementById('nav-admin').style.display = 'flex';
     loadPendingCount();
   }
 
   // ถ้ามีล้งแล้ว แสดงปุ่มโพสราคา
   if (userShop && userShop.status === 'approved') {
     document.getElementById('post-btn').style.display = 'block';
-    document.getElementById('reg-shop-btn').style.display = 'none';
-  } else {
-    document.getElementById('post-btn').style.display = 'none';
-    document.getElementById('reg-shop-btn').style.display = 'block';
   }
 
   renderVBtns('vbtn-wrap');
@@ -925,15 +1081,18 @@ function showApp(user) {
 
 // ===== NAVIGATION =====
 function navTo(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
-  document.getElementById('pg-' + name).classList.add('on');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('on'));
-  const nav = document.getElementById('nav-' + name);
-  if (nav) nav.classList.add('on');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  const pg=document.getElementById('pg-'+name); if(!pg) return;
+  pg.classList.add('on');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
+  ['nav-'+name,'snav-'+name].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('on');});
   window.scrollTo(0,0);
-  if (name === 'map' && mapInst) setTimeout(() => mapInst.invalidateSize(), 150);
-  if (name === 'admin') loadRequests();
-  if (name === 'register') initRegMap();
+  if(name==='map'&&mapInst) setTimeout(()=>mapInst.invalidateSize(),150);
+  if(name==='admin') adminTab('stats');
+  if(name==='register') initRegMap();
+  if(name==='announce') loadAnnounces();
+  if(name==='cutter') cutterTab('board');
+  if(name==='contract') contractTab('market');
 }
 
 // ===== CHECK POST EXPIRED =====
@@ -1438,12 +1597,15 @@ function requestInfo(reqId) {
 }
 
 function adminTab(tab) {
-  document.getElementById('admin-requests').style.display = tab==='requests'?'block':'none';
-  document.getElementById('admin-announce').style.display = tab==='announce'?'block':'none';
-  document.getElementById('at-requests').style.background = tab==='requests'?'var(--g)':'#f5f5f5';
-  document.getElementById('at-requests').style.color = tab==='requests'?'white':'var(--dim)';
-  document.getElementById('at-announce').style.background = tab==='announce'?'var(--g)':'#f5f5f5';
-  document.getElementById('at-announce').style.color = tab==='announce'?'white':'var(--dim)';
+  const tabs = ['stats','requests','cutters','announce'];
+  const contents = {stats:'admin-stats-content',requests:'admin-requests',cutters:'admin-cutter-requests',announce:'admin-announce'};
+  tabs.forEach(t => {
+    const el=document.getElementById('at-'+t); if(el) el.classList.toggle('on',t===tab);
+    const cel=document.getElementById(contents[t]); if(cel) cel.style.display=t===tab?'block':'none';
+  });
+  if(tab==='stats') loadAdminStats();
+  if(tab==='requests') loadRequests();
+  if(tab==='cutters') loadCutterRequests();
 }
 
 // ===== PROFILE =====
@@ -1591,6 +1753,446 @@ function showToast(msg,type=''){
   void t.offsetWidth;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2400);
 }
+
+
+// ===== UPDATE LAST SEEN (Online tracking) =====
+async function updateLastSeen() {
+  if (!currentUser) return;
+  try {
+    await window._fb.setDoc(
+      window._fb.doc(window._db, 'presence', currentUser.uid),
+      {
+        displayName: currentUser.displayName,
+        photoURL: currentUser.photoURL || null,
+        email: currentUser.email,
+        lastSeen: window._fb.serverTimestamp(),
+        role: document.getElementById('user-role')?.value || 'สวน'
+      },
+      {merge: true}
+    );
+  } catch(e) {}
+}
+
+// ===== ADMIN STATS =====
+async function loadAdminStats() {
+  try {
+    const {collection, getDocs, query, orderBy, where} = window._fb;
+    
+    // Total users from presence
+    const presenceSnap = await getDocs(collection(window._db, 'presence'));
+    const allUsers = [];
+    presenceSnap.forEach(d => allUsers.push({id:d.id,...d.data()}));
+    
+    const now = new Date();
+    const tenMinAgo = new Date(now - 10*60*1000);
+    const todayStart = new Date(); todayStart.setHours(0,0,0,0);
+    
+    const online = allUsers.filter(u => u.lastSeen && new Date(u.lastSeen.seconds*1000) > tenMinAgo);
+    const todayNew = allUsers.filter(u => u.lastSeen && new Date(u.lastSeen.seconds*1000) > todayStart);
+    
+    // Shops approved
+    const shopSnap = await getDocs(collection(window._db, 'shops'));
+    let shopCount = 0; shopSnap.forEach(()=>shopCount++);
+    
+    document.getElementById('stat-total').textContent = allUsers.length;
+    document.getElementById('stat-online').textContent = online.length;
+    document.getElementById('stat-today').textContent = todayNew.length;
+    document.getElementById('stat-shops').textContent = shopCount;
+    
+    // Online list
+    const olc = document.getElementById('online-list');
+    if (online.length === 0) {
+      olc.innerHTML = '<div style="padding:14px;text-align:center;color:var(--dim);font-size:13px">ไม่มีผู้ใช้ออนไลน์ตอนนี้</div>';
+    } else {
+      olc.innerHTML = online.sort((a,b) => (b.lastSeen?.seconds||0)-(a.lastSeen?.seconds||0)).slice(0,20).map(u => {
+        const secAgo = Math.floor((now - new Date(u.lastSeen.seconds*1000))/1000);
+        const timeStr = secAgo < 60 ? `${secAgo} วิ` : `${Math.floor(secAgo/60)} นาที`;
+        return `<div class="online-item">
+          <div class="online-dot"></div>
+          <div class="online-name">${u.displayName||'ผู้ใช้'}</div>
+          <span class="online-role">${u.role||'สวน'}</span>
+          <div class="online-time">${timeStr}ที่แล้ว</div>
+        </div>`;
+      }).join('');
+    }
+  } catch(e) { console.log('Stats error:', e); }
+}
+
+// ===== CUTTER BOARD =====
+function cutterTab(tab) {
+  document.getElementById('ct-board-content').style.display = tab==='board' ? 'block' : 'none';
+  document.getElementById('ct-register-content').style.display = tab==='register' ? 'block' : 'none';
+  document.getElementById('ct-board').classList.toggle('on', tab==='board');
+  document.getElementById('ct-register').classList.toggle('on', tab==='register');
+  if (tab === 'board') loadCutters();
+}
+
+async function loadCutters() {
+  try {
+    const {collection, query, where, getDocs, orderBy} = window._fb;
+    const snap = await getDocs(query(collection(window._db,'cutterTeams'), where('status','==','approved'), orderBy('createdAt','desc')));
+    const c = document.getElementById('cutter-list');
+    if (snap.empty) {
+      c.innerHTML = '<div class="empty"><div class="empty-icon">✂️</div><div class="empty-text">ยังไม่มีทีมสายตัดในระบบ</div></div>';
+      return;
+    }
+    c.innerHTML = snap.docs.map(d => {
+      const p = {id:d.id,...d.data()};
+      const workTypes = [];
+      if(p.workCut) workTypes.push('✂️ รับตัด');
+      if(p.workBuy) workTypes.push('💰 รับซื้อในสวน');
+      if(p.workCarry) workTypes.push('🚛 รับขนส่ง');
+      return `<div class="cutter-card">
+        <div class="cutter-hdr">
+          <div class="cutter-name">✂️ ${p.teamName}</div>
+          <span class="cutter-type-badge">✅ ยืนยันแล้ว</span>
+        </div>
+        <div class="cutter-body">
+          <strong>👤 ${p.leaderName}</strong><br>
+          📞 ${p.tel}${p.showTel ? '' : ' (กดดูเบอร์)'}<br>
+          📍 ${p.province}${p.district ? ' / ' + p.district : ''}<br>
+          💰 ${p.price || 'ติดต่อตกลงราคา'}<br>
+          👥 ${p.members || '-'} คน
+          <div class="work-tags">${workTypes.map(w=>`<span class="work-tag">${w}</span>`).join('')}</div>
+        </div>
+        <div class="cutter-acts">
+          <button class="pa pa-map" style="background:#e3f2fd;border-color:#2196f3;color:#1565c0" onclick="openReviewModal('${p.id}','cutter','${(p.teamName||'').replace(/'/g,"\'")}')">⭐ รีวิว</button>
+          <button class="pa pa-q" onclick="window.open('tel:${p.tel}')">📞 โทรหา</button>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { console.log('Load cutters error:', e); }
+}
+
+async function submitCutterRegister() {
+  const teamName = document.getElementById('ct-teamname').value.trim();
+  const leaderName = document.getElementById('ct-leader').value.trim();
+  const tel = document.getElementById('ct-tel').value.trim();
+  const province = document.getElementById('ct-province').value;
+  if (!teamName || !leaderName || !tel) { showToast('กรุณากรอกข้อมูลที่จำเป็น','err'); return; }
+  const workCut = document.getElementById('ct-w-cut').checked;
+  const workBuy = document.getElementById('ct-w-buy').checked;
+  const workCarry = document.getElementById('ct-w-carry').checked;
+  if (!workCut && !workBuy && !workCarry) { showToast('กรุณาเลือกประเภทงานอย่างน้อย 1 อย่าง','err'); return; }
+  try {
+    await window._fb.addDoc(window._fb.collection(window._db,'cutterRequests'), {
+      uid: currentUser.uid,
+      displayName: currentUser.displayName,
+      email: currentUser.email,
+      teamName, leaderName, tel, province,
+      district: document.getElementById('ct-district').value,
+      workCut, workBuy, workCarry,
+      price: document.getElementById('ct-price').value,
+      members: document.getElementById('ct-members').value,
+      status: 'pending',
+      createdAt: window._fb.serverTimestamp()
+    });
+    showToast('✅ ส่งคำขอแล้ว รอแอดมินอนุมัติ');
+    cutterTab('board');
+    ['ct-teamname','ct-leader','ct-tel','ct-district','ct-price','ct-members'].forEach(id => document.getElementById(id).value='');
+  } catch(e) { showToast('เกิดข้อผิดพลาด: '+e.message,'err'); }
+}
+
+// ===== CONTRACT SYSTEM =====
+function contractTab(tab) {
+  ['market','mine','new'].forEach(t => {
+    document.getElementById('con-'+t+'-content').style.display = t===tab ? 'block' : 'none';
+    document.getElementById('con-'+t).classList.toggle('on', t===tab);
+  });
+  if (tab === 'market') loadContractMarket();
+  if (tab === 'mine') loadMyContracts();
+}
+
+async function loadContractMarket() {
+  try {
+    const {collection, query, where, orderBy, getDocs} = window._fb;
+    const snap = await getDocs(query(collection(window._db,'contractListings'), where('status','==','open'), orderBy('createdAt','desc')));
+    const c = document.getElementById('contract-market-list');
+    if (snap.empty) {
+      c.innerHTML = '<div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศขาย<br>กด "+ ประกาศขาย" เพื่อเริ่มต้น</div></div>';
+      return;
+    }
+    c.innerHTML = snap.docs.map(d => {
+      const p = {id:d.id,...d.data()};
+      const isOwner = p.uid === currentUser?.uid;
+      const t = p.createdAt ? new Date(p.createdAt.seconds*1000).toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'}) : '—';
+      return `<div class="contract-card">
+        <div class="contract-hdr">
+          <div>
+            <div class="contract-title">🌳 ${p.variety} — ${p.location}</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">โดย ${p.ownerName} | ${t}</div>
+          </div>
+          <span class="contract-status cs-open">เปิดรับข้อเสนอ</span>
+        </div>
+        <div class="contract-info">
+          <div class="ci-item"><span class="ci-label">ปริมาณคาดการณ์</span><span class="ci-val">${p.amount ? Number(p.amount).toLocaleString()+' กก.' : '—'}</span></div>
+          <div class="ci-item"><span class="ci-label">ราคาที่คาดหวัง</span><span class="ci-val">${p.expectPrice ? p.expectPrice+' บ./กก.' : '—'}</span></div>
+          <div class="ci-item"><span class="ci-label">ช่วงเก็บเกี่ยว</span><span class="ci-val">${p.harvest || '—'}</span></div>
+          <div class="ci-item"><span class="ci-label">มัดจำที่ต้องการ</span><span class="ci-val">${p.deposit ? Number(p.deposit).toLocaleString()+' บ.' : '—'}</span></div>
+        </div>
+        ${p.note ? `<div style="padding:0 14px 8px;font-size:12px;color:var(--dim)">📝 ${p.note}</div>` : ''}
+        <div class="contract-acts">
+          ${!isOwner ? `<button class="ca-btn ca-offer" onclick="openOfferModal('${p.id}','${(p.ownerName||'').replace(/'/g,"\'")}')">💬 ยื่นข้อเสนอ</button>` : ''}
+          <button class="ca-btn ca-detail" onclick="openContractDetail('${p.id}')">📋 รายละเอียด</button>
+          ${isOwner ? `<button class="ca-btn ca-cancel" onclick="cancelListing('${p.id}')">❌ ยกเลิก</button>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { console.log('Load contracts error:', e); }
+}
+
+async function loadMyContracts() {
+  if (!currentUser) return;
+  try {
+    const {collection, query, where, orderBy, getDocs} = window._fb;
+    const snap = await getDocs(query(collection(window._db,'contractListings'), where('uid','==',currentUser.uid), orderBy('createdAt','desc')));
+    const c = document.getElementById('my-contracts-list');
+    if (snap.empty) {
+      c.innerHTML = '<div class="empty"><div class="empty-icon">📄</div><div class="empty-text">ยังไม่มีสัญญาของคุณ<br>กด "+ ประกาศขาย" เพื่อเริ่มต้น</div></div>';
+      return;
+    }
+    const statusLabel = {open:'เปิดรับข้อเสนอ',negotiating:'กำลังเจรจา',signed:'✅ ทำสัญญาแล้ว',done:'เสร็จสิ้น',cancelled:'ยกเลิกแล้ว'};
+    const statusClass = {open:'cs-open',negotiating:'cs-negotiating',signed:'cs-signed',done:'cs-done',cancelled:'cs-done'};
+    c.innerHTML = snap.docs.map(d => {
+      const p = {id:d.id,...d.data()};
+      const t = p.createdAt ? new Date(p.createdAt.seconds*1000).toLocaleDateString('th-TH') : '—';
+      return `<div class="contract-card">
+        <div class="contract-hdr">
+          <div><div class="contract-title">🌳 ${p.variety} — ${p.location}</div><div style="font-size:11px;color:var(--dim);margin-top:2px">${t}</div></div>
+          <span class="contract-status ${statusClass[p.status]||'cs-open'}">${statusLabel[p.status]||p.status}</span>
+        </div>
+        <div class="contract-info">
+          <div class="ci-item"><span class="ci-label">ปริมาณ</span><span class="ci-val">${p.amount ? Number(p.amount).toLocaleString()+' กก.' : '—'}</span></div>
+          <div class="ci-item"><span class="ci-label">มัดจำ</span><span class="ci-val">${p.deposit ? Number(p.deposit).toLocaleString()+' บ.' : '—'}</span></div>
+        </div>
+        ${p.status==='signed' ? `<div class="contract-signed-box"><div class="sig-title">✅ ทำสัญญาแล้ว</div><div class="sig-sub">กับ ${p.buyerName||'—'} | ${p.signedAt ? new Date(p.signedAt.seconds*1000).toLocaleDateString('th-TH') : ''}</div></div>` : ''}
+        <div class="contract-acts">
+          ${p.status==='open' ? `<button class="ca-btn ca-cancel" onclick="cancelListing('${p.id}')">❌ ยกเลิกประกาศ</button>` : ''}
+          <button class="ca-btn ca-detail" onclick="openContractDetail('${p.id}')">📋 รายละเอียด</button>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { console.log('My contracts error:', e); }
+}
+
+async function submitContractListing() {
+  const ownerName = document.getElementById('con-owner').value.trim();
+  const tel = document.getElementById('con-tel').value.trim();
+  const location = document.getElementById('con-location').value.trim();
+  if (!ownerName || !location) { showToast('กรุณากรอกชื่อเจ้าของและที่ตั้งสวน','err'); return; }
+  try {
+    // Check if user already has active listing
+    const {collection, query, where, getDocs} = window._fb;
+    const existing = await getDocs(query(collection(window._db,'contractListings'), where('uid','==',currentUser.uid), where('status','==','open')));
+    if (!existing.empty) { showToast('คุณมีประกาศที่เปิดอยู่แล้ว 1 รายการ กรุณายกเลิกก่อน','err'); return; }
+    
+    await window._fb.addDoc(window._fb.collection(window._db,'contractListings'), {
+      uid: currentUser.uid,
+      displayName: currentUser.displayName,
+      ownerName, tel, location,
+      variety: document.getElementById('con-variety').value,
+      amount: document.getElementById('con-amount').value,
+      harvest: document.getElementById('con-harvest').value,
+      expectPrice: document.getElementById('con-expect-price').value,
+      deposit: document.getElementById('con-deposit').value,
+      note: document.getElementById('con-note').value,
+      status: 'open',
+      createdAt: window._fb.serverTimestamp()
+    });
+    showToast('✅ ประกาศขายแล้ว!');
+    contractTab('market');
+    ['con-owner','con-tel','con-location','con-amount','con-harvest','con-expect-price','con-deposit','con-note'].forEach(id=>document.getElementById(id).value='');
+  } catch(e) { showToast('เกิดข้อผิดพลาด: '+e.message,'err'); }
+}
+
+async function cancelListing(id) {
+  if (!confirm('ยืนยันยกเลิกประกาศนี้?')) return;
+  try {
+    await window._fb.updateDoc(window._fb.doc(window._db,'contractListings',id), {status:'cancelled'});
+    showToast('✅ ยกเลิกแล้ว');
+    loadMyContracts();
+  } catch(e) { showToast('เกิดข้อผิดพลาด','err'); }
+}
+
+function openOfferModal(listingId, ownerName) {
+  document.getElementById('offer-listing-id').value = listingId;
+  document.getElementById('offer-owner-name').textContent = ownerName;
+  document.getElementById('offer-modal').classList.add('on');
+}
+
+async function submitOffer() {
+  const listingId = document.getElementById('offer-listing-id').value;
+  const price = document.getElementById('offer-price').value;
+  const deposit = document.getElementById('offer-deposit').value;
+  const note = document.getElementById('offer-note').value;
+  if (!price) { showToast('กรุณาระบุราคาที่เสนอ','err'); return; }
+  try {
+    await window._fb.addDoc(window._fb.collection(window._db,'contractOffers'), {
+      listingId, uid: currentUser.uid,
+      displayName: currentUser.displayName,
+      shopName: userShop?.shopName || currentUser.displayName,
+      offerPrice: price, depositOffered: deposit, note,
+      status: 'pending',
+      createdAt: window._fb.serverTimestamp()
+    });
+    // Update listing status to negotiating
+    await window._fb.updateDoc(window._fb.doc(window._db,'contractListings',listingId), {status:'negotiating'});
+    closeModal('offer-modal');
+    showToast('✅ ส่งข้อเสนอแล้ว รอชาวสวนตอบรับ');
+    ['offer-price','offer-deposit','offer-note'].forEach(id=>document.getElementById(id).value='');
+  } catch(e) { showToast('เกิดข้อผิดพลาด: '+e.message,'err'); }
+}
+
+function openContractDetail(id) {
+  showToast('📋 รายละเอียดสัญญา — เร็วๆ นี้!','warn');
+}
+
+// ===== REVIEW SYSTEM =====
+let reviewTargetId = null, reviewTargetType = null, reviewRatings = {};
+const REVIEW_CRITERIA = {
+  shop: [{id:'scale',label:'⚖️ ตาชั่งตรงไหม'},{id:'price',label:'💰 ราคาตรงกับที่โพส'},{id:'wait',label:'⏱️ รอคิวนานไหม'},{id:'service',label:'🤝 การบริการ'}],
+  cutter: [{id:'skill',label:'✂️ ฝีมือการตัด'},{id:'speed',label:'⚡ ความรวดเร็ว'},{id:'trust',label:'🤝 ความน่าเชื่อถือ'},{id:'time',label:'📋 ตรงต่อเวลา'}],
+  farmer: [{id:'quality',label:'🌳 คุณภาพทุเรียน'},{id:'quantity',label:'📦 ปริมาณตรงที่แจ้ง'},{id:'trust',label:'🤝 ความน่าเชื่อถือ'}]
+};
+
+function openReviewModal(targetId, targetType, targetName) {
+  reviewTargetId = targetId;
+  reviewTargetType = targetType;
+  reviewRatings = {};
+  const criteria = REVIEW_CRITERIA[targetType] || REVIEW_CRITERIA.shop;
+  document.getElementById('review-target-name').textContent = targetName;
+  const c = document.getElementById('review-criteria-list');
+  c.innerHTML = criteria.map(cr => `
+    <div class="review-criteria-item">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">${cr.label}</div>
+      <div class="star-row" id="stars-${cr.id}">
+        ${[1,2,3,4,5].map(i=>`<span class="star" onclick="setRating('${cr.id}',${i})" data-val="${i}">★</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('review-modal').classList.add('on');
+}
+
+function setRating(criteriaId, value) {
+  reviewRatings[criteriaId] = value;
+  const stars = document.querySelectorAll(`#stars-${criteriaId} .star`);
+  stars.forEach((s,i) => s.classList.toggle('on', i < value));
+}
+
+async function submitReview() {
+  if (!reviewTargetId || !currentUser) return;
+  const filled = Object.keys(reviewRatings).length;
+  const criteria = REVIEW_CRITERIA[reviewTargetType] || REVIEW_CRITERIA.shop;
+  if (filled < criteria.length) { showToast('กรุณาให้คะแนนทุกหัวข้อ','err'); return; }
+  try {
+    // Check if already reviewed
+    const {collection, query, where, getDocs} = window._fb;
+    const existing = await getDocs(query(collection(window._db,'reviews'), where('targetId','==',reviewTargetId), where('reviewerId','==',currentUser.uid)));
+    if (!existing.empty) { showToast('คุณรีวิวแล้ว ไม่สามารถรีวิวซ้ำได้','warn'); closeModal('review-modal'); return; }
+    
+    const avgScore = Object.values(reviewRatings).reduce((a,b)=>a+b,0) / Object.values(reviewRatings).length;
+    await window._fb.addDoc(window._fb.collection(window._db,'reviews'), {
+      targetId: reviewTargetId,
+      targetType: reviewTargetType,
+      reviewerId: currentUser.uid,
+      reviewerName: currentUser.displayName,
+      ratings: reviewRatings,
+      avgScore: parseFloat(avgScore.toFixed(2)),
+      createdAt: window._fb.serverTimestamp()
+    });
+    // Update target avg score
+    const allReviews = await getDocs(query(collection(window._db,'reviews'), where('targetId','==',reviewTargetId)));
+    const scores = []; allReviews.forEach(d => scores.push(d.data().avgScore));
+    const overallAvg = scores.reduce((a,b)=>a+b,0)/scores.length;
+    const collection_name = reviewTargetType==='cutter' ? 'cutterTeams' : 'shops';
+    await window._fb.updateDoc(window._fb.doc(window._db, collection_name, reviewTargetId), {
+      avgRating: parseFloat(overallAvg.toFixed(2)),
+      reviewCount: scores.length
+    });
+    closeModal('review-modal');
+    showToast('✅ รีวิวเรียบร้อย ขอบคุณ!');
+  } catch(e) { showToast('เกิดข้อผิดพลาด: '+e.message,'err'); }
+}
+
+// ===== EXTEND ADMIN TAB to include cutter requests + stats =====
+async function loadCutterRequests() {
+  try {
+    const {collection, query, orderBy, getDocs} = window._fb;
+    const snap = await getDocs(query(collection(window._db,'cutterRequests'), orderBy('createdAt','desc')));
+    const c = document.getElementById('cutter-req-list');
+    if (snap.empty) { c.innerHTML='<div class="empty"><div class="empty-icon">✂️</div><div class="empty-text">ยังไม่มีคำขอทีมสายตัด</div></div>'; return; }
+    const statusLabel = {pending:'รอการอนุมัติ',approved:'อนุมัติแล้ว',rejected:'ไม่ผ่าน'};
+    c.innerHTML = snap.docs.map(d => {
+      const p={id:d.id,...d.data()};
+      const t=p.createdAt?new Date(p.createdAt.seconds*1000).toLocaleDateString('th-TH'):'—';
+      return `<div class="req-card">
+        <div class="req-hdr"><div><div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:14px">✂️ ${p.teamName}</div><div style="font-size:11px;color:var(--dim)">${p.province} | ${t}</div></div><span class="req-status ${p.status}">${statusLabel[p.status]||p.status}</span></div>
+        <div class="req-body">👤 ${p.leaderName}<br>📞 ${p.tel}<br>📍 ${p.province}${p.district?' / '+p.district:''}<br>📧 ${p.email}</div>
+        ${p.status==='pending'?`<div class="req-acts">
+          <button class="ra-btn ra-approve" onclick="approveCutter('${p.id}')">✅ อนุมัติ</button>
+          <button class="ra-btn ra-reject" onclick="rejectCutter('${p.id}')">❌ ปฏิเสธ</button>
+        </div>`:''}
+      </div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+async function approveCutter(reqId) {
+  if (!confirm('อนุมัติทีมสายตัดนี้?')) return;
+  try {
+    const {doc,getDoc,updateDoc,addDoc,collection} = window._fb;
+    const reqSnap = await getDoc(doc(window._db,'cutterRequests',reqId));
+    if (!reqSnap.exists()) return;
+    const req = reqSnap.data();
+    await addDoc(collection(window._db,'cutterTeams'), {...req, status:'approved', approvedAt:window._fb.serverTimestamp()});
+    await updateDoc(doc(window._db,'cutterRequests',reqId), {status:'approved'});
+    loadCutterRequests(); loadPendingCount();
+    showToast('✅ อนุมัติทีมสายตัดแล้ว!');
+  } catch(e) { showToast('เกิดข้อผิดพลาด','err'); }
+}
+
+async function rejectCutter(reqId) {
+  if (!confirm('ปฏิเสธคำขอนี้?')) return;
+  try {
+    await window._fb.updateDoc(window._fb.doc(window._db,'cutterRequests',reqId), {status:'rejected'});
+    loadCutterRequests(); showToast('❌ ปฏิเสธแล้ว');
+  } catch(e) { showToast('เกิดข้อผิดพลาด','err'); }
+}
+
 </script>
+
+<!-- OFFER MODAL -->
+<div class="modal-ov" id="offer-modal">
+  <div class="modal-box">
+    <div class="modal-drag"></div>
+    <div class="modal-title">💬 ยื่นข้อเสนอ</div>
+    <div style="font-size:13px;color:var(--dim);margin-bottom:12px">ถึงชาวสวน: <strong id="offer-owner-name">—</strong></div>
+    <input type="hidden" id="offer-listing-id">
+    <div class="ig" style="margin-bottom:8px"><label>ราคาที่เสนอ (บาท/กก.) *</label><input id="offer-price" placeholder="เช่น 115" type="number" inputmode="numeric"></div>
+    <div class="ig" style="margin-bottom:8px"><label>เงินมัดจำที่เสนอ (บาท)</label><input id="offer-deposit" placeholder="เช่น 50000" type="number" inputmode="numeric"></div>
+    <div class="ig" style="margin-bottom:12px"><label>หมายเหตุ / เงื่อนไข</label><textarea id="offer-note" rows="2" placeholder="เงื่อนไขเพิ่มเติม..."></textarea></div>
+    <div style="background:#fff9e0;border:1px solid var(--y);border-radius:10px;padding:10px 12px;font-size:11px;color:#5c3d11;line-height:1.8;margin-bottom:12px">
+      ⚠️ การยืนยันสัญญาต้องกด "ยืนยัน" ทั้งสองฝ่าย<br>
+      ก่อนตัด/ก่อนชั่ง เพื่อยืนยันว่าซื้อขายจริง
+    </div>
+    <button class="btn-main" onclick="submitOffer()">📤 ส่งข้อเสนอ</button>
+    <button class="btn-sec" onclick="closeModal('offer-modal')">ยกเลิก</button>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="modal-ov" id="review-modal">
+  <div class="modal-box">
+    <div class="modal-drag"></div>
+    <div class="modal-title">⭐ รีวิว</div>
+    <div style="font-size:13px;color:var(--dim);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">
+      รีวิว: <strong id="review-target-name">—</strong>
+    </div>
+    <div id="review-criteria-list" style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px"></div>
+    <button class="btn-main" onclick="submitReview()">✅ ส่งรีวิว</button>
+    <button class="btn-sec" onclick="closeModal('review-modal')">ยกเลิก</button>
+  </div>
+</div>
+
 </body>
 </html>
