@@ -558,32 +558,19 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
           id="guest-ann-body">—</div>
       </div>
 
-      <!-- ราคาจากล้ง preview -->
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:14px;color:var(--g)">
-          🏭 ราคาจากล้ง/แผง
-        </div>
-        <span style="font-size:11px;color:var(--dim)" id="guest-post-count">—</span>
-      </div>
-
-      <div id="guest-posts-preview"></div>
-
-      <!-- CTA: เชิญ Login -->
+      <!-- CTA Simple -->
       <div class="guest-cta">
-        <div class="guest-cta-title">🔐 อยากดูรายละเอียดเพิ่มเติม?</div>
-        <div class="guest-cta-list">
-          ✅ ดูเบอร์โทรติดต่อล้ง/แผง<br>
-          ✅ จองคิวล่วงหน้า<br>
-          ✅ ลงทะเบียนล้ง / แผง / สายตัด<br>
-          ✅ จดตาชั่งในสวน<br>
-          ✅ ทำสัญญาซื้อขายในสวน
-        </div>
         <button class="guest-cta-btn" onclick="showLoginFromGuest()">
           🌿 เข้าสู่ระบบฟรี ด้วย Google
         </button>
         <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:8px">
           ฟรี ไม่มีค่าใช้จ่าย • ไม่เก็บรหัสผ่าน
         </div>
+        <button onclick="enterGuestMode()" style="background:none;border:1px solid rgba(255,255,255,.3);
+          color:rgba(255,255,255,.7);font-family:'Kanit',sans-serif;font-size:12px;font-weight:600;
+          padding:7px 16px;border-radius:20px;cursor:pointer;margin-top:8px;width:100%">
+          ใช้งานโดยไม่ล็อกอิน
+        </button>
       </div>
 
     </div>
@@ -793,7 +780,36 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
             <label class="tel-toggle"><input type="checkbox" id="reg-tel-show" checked> แสดงในเพจ</label>
           </div>
         </div>
-        <div class="ig"><label>หมายเหตุ / เงื่อนไขรับซื้อ</label><textarea id="reg-note" rows="2" placeholder="เช่น เน้นเนื้อสูง รับทุกเกรด..."></textarea></div>
+        <div class="ig"><label>หมายเหตุ / เงื่อนไขรับซื้อ (แนะนำล้ง)</label><textarea id="reg-note" rows="3" placeholder="แนะนำตัวสั้นๆ เช่น ล้งสมชายรับซื้อทุเรียนทุกพันธุ์ เน้นคุณภาพ ราคายุติธรรม เปิดรับตั้งแต่ 13.00 น.บทุกเกรด..."></textarea></div>
+
+      <div class="ctitle" style="margin-top:12px">⭐ เกรดมาตรฐานของล้ง</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:8px;line-height:1.6;background:#f0f8f0;padding:8px 10px;border-radius:8px">
+        ให้คนสวนรู้ว่าล้งของคุณเป็นแบบไหน ช่วยจับคู่ได้ถูกต้อง
+      </div>
+      <div class="ig" style="margin-bottom:8px">
+        <label>💰 ระดับราคารับซื้อ</label>
+        <select id="reg-grade-price">
+          <option value="market">ราคาตลาด (ราคาอ้างอิงกลาง)</option>
+          <option value="above">สูงกว่าตลาด (รับสินค้าดีราคาดี)</option>
+          <option value="below">ต่ำกว่าตลาดเล็กน้อย (ยืดหยุ่นได้)</option>
+        </select>
+      </div>
+      <div class="ig" style="margin-bottom:8px">
+        <label>🔲 มาตรฐานการคัดทรง</label>
+        <select id="reg-grade-shape">
+          <option value="normal">คัดทรงปกติ</option>
+          <option value="strict">เน้นทรงกว่าปกติ (คัดเข้มงวด)</option>
+          <option value="flexible">ไม่เน้นทรง ช่วยทรงได้บ้าง</option>
+        </select>
+      </div>
+      <div class="ig" style="margin-bottom:8px">
+        <label>🟡 มาตรฐานการคัดเนื้อ</label>
+        <select id="reg-grade-flesh">
+          <option value="normal">คัดเนื้อปกติ</option>
+          <option value="strict">เน้นเนื้อกว่าปกติ (เนื้อต้องสมบูรณ์)</option>
+          <option value="flexible">ช่วยเนื้อได้บ้าง (รับได้หลายระดับ)</option>
+        </select>
+      </div>
       </div>
       <button class="btn-main" onclick="regNext(1)">ถัดไป → ระบุพิกัด 📍</button>
     </div>
@@ -801,16 +817,34 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
     <!-- Step 2: พิกัด -->
     <div id="reg-s2" style="display:none">
       <div class="card">
-        <div class="ctitle">📍 ระบุตำแหน่งล้ง/แผง</div>
-        <div class="loc-btns">
-          <button class="loc-btn loc-btn-gps" onclick="regUseGPS()">📍 ใช้ GPS ปัจจุบัน</button>
-          <button class="loc-btn loc-btn-drag" onclick="regUseDrag()">🗺️ เลือกบนแผนที่</button>
-        </div>
-        <div class="map-picker-hint" id="reg-loc-hint">กดปุ่มด้านบนเพื่อระบุตำแหน่ง</div>
-        <div class="map-picker" id="reg-map"></div>
-        <div id="reg-coords" style="font-size:12px;color:var(--dim);text-align:center;margin-top:6px;display:none">
-          📍 ตำแหน่ง: <span id="reg-lat">—</span>, <span id="reg-lng">—</span>
-        </div>
+        <div class="ctitle">📍 ที่ตั้งล้ง/แผง</div>
+      <div class="ig" style="margin-bottom:8px">
+        <label>จังหวัด *</label>
+        <select id="reg-province">
+          <option value="จันทบุรี">จ.จันทบุรี</option>
+          <option value="ระยอง">จ.ระยอง</option>
+          <option value="ตราด">จ.ตราด</option>
+          <option value="ชุมพร">จ.ชุมพร</option>
+          <option value="สุราษฎร์ธานี">จ.สุราษฎร์ธานี</option>
+        </select>
+      </div>
+      <div class="ig" style="margin-bottom:8px">
+        <label>อำเภอ *</label>
+        <select id="reg-district">
+          <option value="เมืองจันทบุรี">อ.เมืองจันทบุรี</option>
+          <option value="โป่งน้ำร้อน">อ.โป่งน้ำร้อน</option>
+          <option value="เขาคิชฌกูฏ">อ.เขาคิชฌกูฏ</option>
+          <option value="มะขาม">อ.มะขาม</option>
+          <option value="ท่าใหม่">อ.ท่าใหม่</option>
+          <option value="สอยดาว">อ.สอยดาว</option>
+          <option value="แก่งหางแมว">อ.แก่งหางแมว</option>
+          <option value="นายายอาม">อ.นายายอาม</option>
+        </select>
+      </div>
+      <div class="ig">
+        <label>ตำบล / หมู่บ้าน</label>
+        <input id="reg-subdistrict" placeholder="เช่น ต.เนินสูง">
+      </div>
       </div>
       <button class="btn-main" onclick="regNext(2)">ถัดไป → อัปโหลดโลโก้ 🖼️</button>
       <button class="btn-sec" onclick="regBack(1)">← กลับ</button>
@@ -903,18 +937,43 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
     </div>
 
     <div class="card">
+      <div class="ctitle">✏️ ข้อมูลของฉัน</div>
+      <div class="ig" style="margin-bottom:8px">
+        <label>ชื่อที่แสดงในแอพ</label>
+        <input id="profile-display-name" placeholder="ชื่อเล่น หรือชื่อที่อยากให้คนอื่นเห็น">
+      </div>
+      <div class="irow">
+        <div class="ig"><label>ชื่อจริง <span style="font-size:10px;color:#aaa">(ซ่อนไว้)</span></label>
+          <input id="profile-real-fname" placeholder="ชื่อ"></div>
+        <div class="ig"><label>นามสกุลจริง <span style="font-size:10px;color:#aaa">(ซ่อนไว้)</span></label>
+          <input id="profile-real-lname" placeholder="นามสกุล"></div>
+      </div>
+      <div class="ig" style="margin-bottom:6px">
+        <label>เบอร์โทรศัพท์</label>
+        <input id="profile-tel" placeholder="08x-xxx-xxxx" type="tel">
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;margin-bottom:12px;
+        background:#f5f5f5;padding:10px;border-radius:10px;cursor:pointer">
+        <input type="checkbox" id="profile-tel-show" style="width:18px;height:18px">
+        <span style="font-size:13px;color:var(--dim)">แสดงเบอร์โทรให้คนอื่นเห็น
+          <span style="display:block;font-size:11px;color:#bbb">ค่าเริ่มต้น: ไม่แสดง</span></span>
+      </label>
+      <button onclick="saveProfileInfo()" style="width:100%;background:var(--g);border:2px solid var(--y);
+        color:var(--y);font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;
+        padding:11px;border-radius:12px;cursor:pointer">💾 บันทึกข้อมูล</button>
+    </div>
+
+    <div class="card">
       <div class="ctitle">⚙️ บทบาทของฉัน</div>
       <div class="ig">
         <select id="user-role" onchange="saveRole()">
           <option value="สวน">🌳 คนสวน / คนขาย</option>
-          <option value="แผง">🏪 แผงรับซื้อ</option>
-          <option value="ล้ง">🏭 ล้ง (ส่งออก)</option>
           <option value="แม่ค้า">🛒 แม่ค้า / ผู้ซื้อต่อ</option>
         </select>
       </div>
     </div>
 
-    <button class="btn-main" onclick="navTo('register')" id="reg-shop-btn">🏭 ขอลงทะเบียนล้ง/แผง</button>
+    <button class="btn-main" onclick="navTo('register')" id="reg-shop-btn">📋 ขอลงทะเบียน ล้ง / แผง / สายตัด</button>
     <button class="btn-danger" onclick="logoutUser()">🚪 ออกจากระบบ</button>
   </div>
 
@@ -1116,15 +1175,17 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
 
 <!-- PAGE: สัญญาในสวน -->
 <div class="page" id="pg-market">
-  <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:17px;color:var(--g);margin-bottom:12px">🛒 ตลาด</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:17px;color:var(--g)">🛒 ตลาด</div>
+    <button onclick="marketTab('new')" style="background:var(--g);border:2px solid var(--y);color:var(--y);font-family:'Kanit',sans-serif;font-size:13px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer">+ เพิ่มโพส</button>
+  </div>
   <div style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px">
     <button onclick="marketTab('sell')" id="con-market" class="tab-btn on">🌳 หาคนเหมา</button>
     <button onclick="marketTab('cutter')" id="con-cutter" class="tab-btn">✂️ สายตัด</button>
     <button onclick="marketTab('mine')" id="con-mine" class="tab-btn">📄 ของฉัน</button>
-    <button onclick="marketTab('new')" id="con-new" class="tab-btn tab-btn-yellow">+ ประกาศหาคนเหมา</button>
   </div>
-
-  <div id="con-sell-content">
+  <div id="con-new-panel" style="display:none">
+  <div id="con-sell-content" style="display:block">
     <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">สวนทุเรียนที่เปิดรับข้อเสนอจากล้ง/สายตัด</div>
     <div id="contract-market-list"><div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศหาคนเหมา</div></div></div>
   </div>
@@ -1261,7 +1322,7 @@ const VAR_STYLE = {
   'หนามดำ':{bg:'#eceff1',border:'#607d8b',glow:false},
   'หลง/หลินลับแล':{bg:'#e0f7fa',border:'#00bcd4',glow:false},
 };
-const NEINSUG_LAT = 12.5766, NEINSUG_LNG = 102.0640;
+const NEINSUG_LAT = 12.5880, NEINSUG_LNG = 102.0495;
 
 // ===== STATE =====
 let currentUser = null;
@@ -1376,8 +1437,8 @@ function showApp(user) {
   renderVBtns('quick-vbtn-wrap');
   initPostVarSelector();
   loadPosts();
-  loadAnnounce();
-  initMap();
+  setTimeout(()=>loadAnnounce(), 400);
+  setTimeout(()=>initMap(), 600);
   updateProfileShopStatus();
 }
 
@@ -1391,6 +1452,7 @@ function navTo(name) {
   window.scrollTo(0,0);
   if(name==='map'&&mapInst) setTimeout(()=>mapInst.invalidateSize(),150);
   if(name==='admin') adminTab('stats');
+  if(name==='profile') loadProfileInfo();
   if(name==='register') initRegMap();
   if(name==='announce') loadAnnounces();
   if(name==='cutter') cutterTab('board');
@@ -1735,7 +1797,7 @@ function buildSummary() {
     📋 <strong>ประเภท:</strong> ${document.getElementById('reg-type').value}<br>
     👤 <strong>เจ้าของ:</strong> ${document.getElementById('reg-fname').value} ${document.getElementById('reg-lname').value}<br>
     📞 <strong>เบอร์โทร:</strong> ${document.getElementById('reg-tel').value} ${document.getElementById('reg-tel-show').checked?'(แสดงสาธารณะ)':'(ไม่แสดง)'}<br>
-    📍 <strong>พิกัด:</strong> ${regLat?.toFixed(4)}, ${regLng?.toFixed(4)}<br>
+    📍 <strong>ที่ตั้ง:</strong> ${document.getElementById('reg-province')?.value} / ${document.getElementById('reg-district')?.value} / ${document.getElementById('reg-subdistrict')?.value||'-'}<br>⭐ <strong>เกรดราคา:</strong> ${document.getElementById('reg-grade-price')?.options[document.getElementById('reg-grade-price')?.selectedIndex]?.text||'-'}<br>
     🖼️ <strong>โลโก้:</strong> ${regLogoData ? 'มีรูปโลโก้' : 'ไม่มีโลโก้'}<br>
     ⏰ <strong>เวลาเปิด:</strong> ${document.getElementById('reg-time').value || 'ไม่ระบุ'}
   `;
@@ -2198,12 +2260,21 @@ async function submitCutterRegister() {
 
 // ===== CONTRACT SYSTEM =====
 function marketTab(tab) {
-  const tabs = ['sell','cutter','mine','new'];
-  const contents = {sell:'con-sell-content',cutter:'con-cutter-content',mine:'con-mine-content',new:'con-new-content'};
+  const tabs = ['sell','cutter','mine'];
+  const contents = {sell:'con-sell-content',cutter:'con-cutter-content',mine:'con-mine-content'};
+  // handle tabs
   tabs.forEach(t => {
     const el=document.getElementById('con-'+t); if(el) el.classList.toggle('on',t===tab);
     const cel=document.getElementById(contents[t]); if(cel) cel.style.display=t===tab?'block':'none';
   });
+  // new post panel
+  const newDiv = document.getElementById('con-new');
+  if(tab==='new') {
+    if(newDiv) newDiv.style.display='block';
+    tabs.forEach(t=>{const el=document.getElementById('con-'+t);if(el)el.classList.remove('on');const cel=document.getElementById(contents[t]);if(cel)cel.style.display='none';});
+  } else {
+    if(newDiv) newDiv.style.display='none';
+  }
   if(tab==='sell') loadContractMarket();
   if(tab==='cutter') loadMarketCutters();
   if(tab==='mine') loadMyContracts();
@@ -2670,6 +2741,95 @@ function renderGuestPosts(posts) {
 
 // ===== FIX หาคนเหมาซื้อ → หาคนเหมา =====
 // (handled in HTML already, but fix any remaining JS references)
+
+
+// ===== PROFILE INFO SAVE =====
+async function saveProfileInfo() {
+  if (!currentUser) return;
+  const displayName = document.getElementById('profile-display-name')?.value.trim();
+  const fname = document.getElementById('profile-real-fname')?.value.trim();
+  const lname = document.getElementById('profile-real-lname')?.value.trim();
+  const tel = document.getElementById('profile-tel')?.value.trim();
+  const telShow = document.getElementById('profile-tel-show')?.checked || false;
+  try {
+    await window._fb.setDoc(window._fb.doc(window._db,'users',currentUser.uid), {
+      displayName: displayName || currentUser.displayName,
+      realFirstName: fname,
+      realLastName: lname,
+      tel, telShow,
+      updatedAt: window._fb.serverTimestamp()
+    }, {merge:true});
+    // Update header name if changed
+    if (displayName) {
+      document.getElementById('prof-name').textContent = displayName;
+    }
+    showToast('✅ บันทึกข้อมูลแล้ว');
+  } catch(e) { showToast('เกิดข้อผิดพลาด: '+e.message,'err'); }
+}
+
+async function loadProfileInfo() {
+  if (!currentUser) return;
+  try {
+    const snap = await window._fb.getDoc(window._fb.doc(window._db,'users',currentUser.uid));
+    if (snap.exists()) {
+      const d = snap.data();
+      if(d.displayName) {
+        const el = document.getElementById('profile-display-name');
+        if(el) el.value = d.displayName;
+      }
+      if(d.realFirstName) {
+        const el = document.getElementById('profile-real-fname');
+        if(el) el.value = d.realFirstName;
+      }
+      if(d.realLastName) {
+        const el = document.getElementById('profile-real-lname');
+        if(el) el.value = d.realLastName;
+      }
+      if(d.tel) {
+        const el = document.getElementById('profile-tel');
+        if(el) el.value = d.tel;
+      }
+      // telShow default = false, don't check unless explicitly true
+      const telShowEl = document.getElementById('profile-tel-show');
+      if(telShowEl) telShowEl.checked = d.telShow === true;
+    }
+  } catch(e) {}
+}
+
+// ===== GUEST MODE (ไม่ Login) =====
+function enterGuestMode() {
+  document.getElementById('page-guest').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  window._guestMode = true;
+  // Show app in read-only mode
+  const now = new Date();
+  document.getElementById('today-date').textContent =
+    '📅 ' + now.toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('last-update').textContent =
+    'อัปเดต ' + now.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}) + ' น.';
+  // Hide features that need login
+  const hideIds = ['post-btn','reg-shop-btn','hdr-av','notif-btn'];
+  hideIds.forEach(id => { const el=document.getElementById(id); if(el) el.style.display='none'; });
+  // Show guest avatar
+  document.getElementById('hdr-av-ph').onclick = () => showToast('กรุณาล็อกอินก่อนใช้งาน','warn');
+  // Add login nudge banner
+  addGuestBanner();
+  // Hide map nav (guest can't use map)
+  const mapNav = document.getElementById('nav-map');
+  if(mapNav) mapNav.style.opacity = '0.4';
+  loadPosts(); loadAnnounces();
+  initGuestPage(); // load prices
+  // Show prices in main page
+  document.getElementById('avg-price').textContent = document.getElementById('guest-avg')?.textContent || '—';
+}
+
+function addGuestBanner() {
+  const banner = document.createElement('div');
+  banner.id = 'guest-banner';
+  banner.style.cssText = 'position:fixed;bottom:72px;left:0;right:0;max-width:480px;margin:0 auto;background:var(--g);color:white;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;z-index:99;font-size:12px;font-family:Kanit,sans-serif;font-weight:700';
+  banner.innerHTML = '🌿 ล็อกอินเพื่อใช้งานเต็มรูปแบบ <button onclick="showLogin()" style="background:var(--y);border:none;color:var(--gd);font-family:Kanit,sans-serif;font-size:12px;font-weight:800;padding:5px 12px;border-radius:20px;cursor:pointer">เข้าสู่ระบบ</button>';
+  document.body.appendChild(banner);
+}
 
 </script>
 
