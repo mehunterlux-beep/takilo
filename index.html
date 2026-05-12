@@ -450,11 +450,145 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
 
 .star-row{display:flex;gap:4px}
 .review-criteria-item{background:#fafafa;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+
+/* ===== GUEST PAGE ===== */
+.guest-page{min-height:100vh;background:var(--bg);display:flex;flex-direction:column}
+.guest-hdr{background:linear-gradient(135deg,var(--gd),var(--g));padding:14px 16px;
+  display:flex;align-items:center;justify-content:space-between}
+.guest-logo{font-family:'Kanit',sans-serif;font-size:22px;font-weight:900;color:var(--y)}
+.guest-logo span{font-size:11px;font-weight:400;color:rgba(255,255,255,.65);display:block;margin-top:1px}
+.guest-login-btn{background:var(--y);border:none;color:var(--gd);font-family:'Kanit',sans-serif;
+  font-size:13px;font-weight:800;padding:8px 16px;border-radius:20px;cursor:pointer}
+.guest-content{flex:1;padding:14px;padding-bottom:100px}
+.guest-banner{background:linear-gradient(135deg,var(--g),#2e7d32);border-radius:var(--r);
+  padding:18px 16px;margin-bottom:14px;position:relative;overflow:hidden}
+.guest-banner::before{content:'🌿';position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.15}
+.gb-title{font-family:'Kanit',sans-serif;font-weight:900;font-size:13px;color:rgba(255,255,255,.8);margin-bottom:4px}
+.gb-price{font-family:'Kanit',sans-serif;font-weight:900;font-size:48px;color:var(--y);line-height:1}
+.gb-unit{font-size:14px;color:rgba(255,255,255,.7);margin-top:2px}
+.gb-range{display:flex;gap:14px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.15)}
+.gb-range span{font-size:12px;color:rgba(255,255,255,.8)}
+.guest-price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+.gp-card{background:white;border-radius:12px;padding:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.gp-card .variety{font-size:12px;color:var(--dim);font-weight:600;margin-bottom:3px}
+.gp-card .price{font-family:'Kanit',sans-serif;font-weight:900;font-size:24px;color:var(--g);line-height:1}
+.gp-card.no-data .price{font-size:16px;color:#ccc}
+.gp-card .unit{font-size:10px;color:#bbb;margin-top:2px}
+.guest-post-card{background:white;border-radius:var(--r);box-shadow:var(--shadow);
+  margin-bottom:8px;overflow:hidden;border:2px solid rgba(245,197,24,.3);
+  position:relative}
+.guest-blur-overlay{position:absolute;bottom:0;left:0;right:0;height:70px;
+  background:linear-gradient(to bottom,transparent,rgba(255,255,255,.97));
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px}
+.guest-cta{background:linear-gradient(135deg,var(--g),var(--gd));border-radius:var(--r);
+  padding:16px;margin-bottom:14px;text-align:center;border:2px solid var(--y)}
+.guest-cta-title{font-family:'Kanit',sans-serif;font-weight:800;font-size:15px;color:var(--y);margin-bottom:6px}
+.guest-cta-list{font-size:12px;color:rgba(255,255,255,.85);line-height:1.9;margin-bottom:12px;text-align:left}
+.guest-cta-btn{width:100%;background:var(--y);border:none;color:var(--gd);font-family:'Kanit',sans-serif;
+  font-size:15px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;
+  box-shadow:0 4px 16px rgba(245,197,24,.4)}
+.guest-cta-btn:active{transform:scale(.97)}
+.guest-ann{background:linear-gradient(135deg,#fff8e1,#fff3b0);border-radius:var(--r);
+  padding:12px 14px;border-left:5px solid var(--or);margin-bottom:14px}
+.guest-date-bar{background:var(--y);border-radius:10px;padding:8px 12px;
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.guest-date-text{font-family:'Kanit',sans-serif;font-weight:700;font-size:13px;color:#5c3d11}
+.guest-live{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#1a4a1a}
+.guest-live::before{content:'';width:7px;height:7px;background:var(--g);border-radius:50%;animation:pulse 1.5s infinite}
+.guest-locked{display:flex;align-items:center;gap:6px;background:#f5f5f5;border-radius:8px;
+  padding:6px 10px;font-size:11px;color:#aaa;cursor:pointer}
+.guest-locked:active{background:#eee}
+
 </style>
 </head>
 <body>
 
 <div class="loading" id="loading"><div class="spinner"></div><div class="loading-text">กำลังโหลด ตากิโล...</div></div>
+
+<!-- ===== GUEST PAGE (ก่อน Login) ===== -->
+<div id="page-guest" style="display:none">
+  <div class="guest-page">
+
+    <!-- Header -->
+    <div class="guest-hdr">
+      <div class="guest-logo">🌿 ตากิโล<span>เนินสูง จันทบุรี</span></div>
+      <button class="guest-login-btn" onclick="showLoginFromGuest()">เข้าสู่ระบบ</button>
+    </div>
+
+    <div class="guest-content">
+
+      <!-- Date + live -->
+      <div class="guest-date-bar">
+        <div class="guest-date-text" id="guest-date">📅 —</div>
+        <div class="guest-live">สด</div>
+      </div>
+
+      <!-- Main price card: หมอนทอง -->
+      <div class="guest-banner">
+        <div class="gb-title">🌟 ราคากลาง หมอนทอง วันนี้</div>
+        <div class="gb-price" id="guest-avg">—</div>
+        <div class="gb-unit">บาท/กก. (เฉลี่ยจากหลายล้ง)</div>
+        <div class="gb-range">
+          <span id="guest-max">⬆ สูงสุด —</span>
+          <span id="guest-min">⬇ ต่ำสุด —</span>
+          <span id="guest-src" style="margin-left:auto;font-weight:700">0 ล้ง</span>
+        </div>
+      </div>
+
+      <!-- พันธุ์อื่น -->
+      <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:14px;
+        color:var(--g);margin-bottom:8px">💰 พันธุ์อื่น</div>
+      <div class="guest-price-grid">
+        <div class="gp-card no-data"><div class="variety">ชะนี</div><div class="price">—</div><div class="unit">ยังไม่มีราคา</div></div>
+        <div class="gp-card no-data"><div class="variety">กระดุม</div><div class="price">—</div><div class="unit">ยังไม่มีราคา</div></div>
+        <div class="gp-card no-data"><div class="variety">ก้านยาว</div><div class="price">—</div><div class="unit">ยังไม่มีราคา</div></div>
+        <div class="gp-card no-data"><div class="variety">นกหยิบ</div><div class="price">—</div><div class="unit">ยังไม่มีราคา</div></div>
+      </div>
+
+      <!-- ประกาศ -->
+      <div class="guest-ann" id="guest-ann" style="display:none">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px">
+          <span style="font-size:16px">📢</span>
+          <span style="font-family:'Kanit',sans-serif;font-weight:700;font-size:13px;color:#5c3d11"
+            id="guest-ann-title">ประกาศ</span>
+          <span style="font-size:11px;color:#aaa;margin-left:auto" id="guest-ann-time"></span>
+        </div>
+        <div style="font-size:13px;color:#5c3d11;line-height:1.6;
+          overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical"
+          id="guest-ann-body">—</div>
+      </div>
+
+      <!-- ราคาจากล้ง preview -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:14px;color:var(--g)">
+          🏭 ราคาจากล้ง/แผง
+        </div>
+        <span style="font-size:11px;color:var(--dim)" id="guest-post-count">—</span>
+      </div>
+
+      <div id="guest-posts-preview"></div>
+
+      <!-- CTA: เชิญ Login -->
+      <div class="guest-cta">
+        <div class="guest-cta-title">🔐 อยากดูรายละเอียดเพิ่มเติม?</div>
+        <div class="guest-cta-list">
+          ✅ ดูเบอร์โทรติดต่อล้ง/แผง<br>
+          ✅ จองคิวล่วงหน้า<br>
+          ✅ ลงทะเบียนล้ง / แผง / สายตัด<br>
+          ✅ จดตาชั่งในสวน<br>
+          ✅ ทำสัญญาซื้อขายในสวน
+        </div>
+        <button class="guest-cta-btn" onclick="showLoginFromGuest()">
+          🌿 เข้าสู่ระบบฟรี ด้วย Google
+        </button>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:8px">
+          ฟรี ไม่มีค่าใช้จ่าย • ไม่เก็บรหัสผ่าน
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- LOGIN -->
 <div id="page-login" style="display:none">
@@ -787,8 +921,7 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
   <nav class="bot-nav">
     <button class="nav-item on" id="nav-price" onclick="navTo('price')"><span class="nav-icon">💰</span><span class="nav-label">ราคา</span></button>
     <button class="nav-item" id="nav-map" onclick="navTo('map')"><span class="nav-icon">🗺️</span><span class="nav-label">แผนที่</span></button>
-    <button class="nav-item" id="nav-contract" onclick="navTo('contract')"><span class="nav-icon">📋</span><span class="nav-label">สัญญา</span></button>
-    <button class="nav-item" id="nav-cutter" onclick="navTo('cutter')"><span class="nav-icon">✂️</span><span class="nav-label">สายตัด</span></button>
+    <button class="nav-item" id="nav-market" onclick="navTo('market')"><span class="nav-icon">🏪</span><span class="nav-label">ตลาด</span></button>
     <button class="nav-item" id="nav-profile" onclick="navTo('profile')"><span class="nav-icon">👤</span><span class="nav-label">ของฉัน</span></button>
   </nav>
 </div>
@@ -843,18 +976,163 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
   </div>
 </div>
 
-<!-- PAGE: สัญญาในสวน -->
-<div class="page" id="pg-contract">
-  <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:17px;color:var(--g);margin-bottom:12px">📋 สัญญาในสวน</div>
-  <div style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px">
-    <button onclick="contractTab('market')" id="con-market" class="tab-btn on">🌳 ประกาศขายสวน</button>
-    <button onclick="contractTab('mine')" id="con-mine" class="tab-btn">📄 สัญญาของฉัน</button>
-    <button onclick="contractTab('new')" id="con-new" class="tab-btn tab-btn-yellow">+ ประกาศขาย</button>
+<!-- PAGE: ตลาด (รวม สัญญา + สายตัด) -->
+<div class="page" id="pg-market">
+  <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:17px;color:var(--g);margin-bottom:12px">🏪 ตลาด</div>
+  <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px">
+    <button onclick="marketTab('contract')" id="mt-contract" class="tab-btn on">🌳 หาคนเหมาซื้อ</button>
+    <button onclick="marketTab('cutter')" id="mt-cutter" class="tab-btn">✂️ ทีมสายตัด</button>
+    <button onclick="marketTab('mine')" id="mt-mine" class="tab-btn">📄 ของฉัน</button>
+    <button onclick="marketTab('new')" id="mt-new" class="tab-btn tab-btn-yellow">+ ประกาศ</button>
   </div>
 
-  <div id="con-market-content">
+  <!-- หาคนเหมาซื้อ -->
+  <div id="mt-contract-content">
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6;background:#e8f5e9;padding:10px 12px;border-radius:10px">
+      🌳 ชาวสวนประกาศหาผู้รับซื้อ/รับเหมา<br>ล้งหรือสายตัดยื่นข้อเสนอได้เลย
+    </div>
+    <div id="market-contract-list"><div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศ</div></div></div>
+  </div>
+
+  <!-- ทีมสายตัดใกล้ฉัน -->
+  <div id="mt-cutter-content" style="display:none">
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6;background:#e3f2fd;padding:10px 12px;border-radius:10px">
+      ✂️ ทีมรับงานใกล้คุณก่อน ไล่ตามตำบล → อำเภอ → จังหวัด
+    </div>
+    <button onclick="locateForCutter()" style="width:100%;background:var(--g);border:none;color:white;font-family:'Kanit',sans-serif;font-size:13px;font-weight:700;padding:10px;border-radius:10px;cursor:pointer;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px">
+      📍 ระบุตำแหน่งเพื่อหาทีมใกล้ฉัน
+    </button>
+    <div id="market-cutter-list"><div class="empty"><div class="empty-icon">✂️</div><div class="empty-text">กด "ระบุตำแหน่ง" เพื่อหาทีมใกล้คุณ<br>หรือเลื่อนดูทีมทั้งหมดด้านล่าง</div></div></div>
+  </div>
+
+  <!-- ของฉัน -->
+  <div id="mt-mine-content" style="display:none">
+    <div id="market-mine-list"><div class="empty"><div class="empty-icon">📄</div><div class="empty-text">ยังไม่มีประกาศของคุณ</div></div></div>
+  </div>
+
+  <!-- ประกาศใหม่ -->
+  <div id="mt-new-content" style="display:none">
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <button onclick="newType('garden')" id="nt-garden" class="tab-btn on" style="flex:1">🌳 ประกาศหาคนเหมา</button>
+      <button onclick="newType('cutter')" id="nt-cutter" class="tab-btn" style="flex:1">✂️ ลงทะเบียนทีมสายตัด</button>
+    </div>
+
+    <!-- ประกาศหาคนเหมาซื้อ -->
+    <div id="new-garden-form">
+      <div class="card">
+        <div class="ctitle">🌳 ประกาศหาคนเหมาซื้อ</div>
+        <div class="ig" style="margin-bottom:8px"><label>ชื่อเจ้าของสวน *</label><input id="con-owner" placeholder="ชื่อ-นามสกุล (ต้องตรงตัวจริง)"></div>
+        <div class="ig" style="margin-bottom:8px"><label>เบอร์โทรติดต่อ *</label><input id="con-tel" placeholder="08x-xxx-xxxx" type="tel"></div>
+        <div class="ig" style="margin-bottom:8px"><label>เลขโฉนดที่ดิน (ถ้ามี)</label><input id="con-deed" placeholder="เช่น 12345 (ใช้ตรวจสอบซ้ำ)"></div>
+        <div class="irow">
+          <div class="ig"><label>พันธุ์หลัก</label>
+            <select id="con-variety">
+              <option>หมอนทอง</option><option>ชะนี</option><option>กระดุม</option>
+              <option>นกหยิบ</option><option>มูซังคิง</option><option>ก้านยาว</option><option>อื่นๆ</option>
+            </select>
+          </div>
+          <div class="ig"><label>ปริมาณคาดการณ์ (กก.)</label><input id="con-amount" placeholder="5000" type="number" inputmode="numeric"></div>
+        </div>
+        <div class="irow">
+          <div class="ig"><label>ช่วงเก็บเกี่ยว</label><input id="con-harvest" placeholder="เช่น ก.ค. 2569"></div>
+          <div class="ig"><label>ราคาที่คาดหวัง (บาท/กก.)</label><input id="con-expect-price" placeholder="120" type="number" inputmode="numeric"></div>
+        </div>
+        <div class="ig" style="margin-bottom:8px"><label>ที่ตั้งสวน *</label><input id="con-location" placeholder="เช่น อ.เขาคิชฌกูฏ จ.จันทบุรี"></div>
+        <div class="ig" style="margin-bottom:8px"><label>เงินมัดจำที่ต้องการ (บาท)</label><input id="con-deposit" placeholder="50000" type="number" inputmode="numeric"></div>
+        <div class="ig"><label>รายละเอียดเพิ่มเติม</label><textarea id="con-note" rows="2" placeholder="เช่น สวน 10 ไร่ ทุเรียนอายุ 10 ปี..."></textarea></div>
+      </div>
+      <div class="card" style="background:#fff9e0;border-color:var(--y)">
+        <div style="font-size:12px;color:#5c3d11;line-height:1.9">
+          ⚠️ <strong>ข้อตกลง</strong><br>
+          • 1 สวน = 1 ประกาศที่ active เท่านั้น<br>
+          • ถ้ามีการลงทะเบียนเลขโฉนดซ้ำ จะแจ้งเตือนทันที<br>
+          • ป้องกันการทำสัญญาซ้ำซ้อนกับหลายผู้ซื้อ
+        </div>
+      </div>
+      <button class="btn-main" onclick="submitContractListing()">📤 ประกาศหาคนเหมา</button>
+
+    <!-- FARM REGISTRATION SECTION -->
+    <div id="pt-farm-form" style="display:none;margin-top:12px">
+      <div class="ctitle">🏡 ลงทะเบียนสวน</div>
+      <div style="background:#e8f5e9;border:1px solid var(--gl);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--g);line-height:1.8;margin-bottom:12px">
+        ✅ ลงทะเบียนสวนเพื่อทำสัญญาในแอพ และป้องกันสวมรอย
+      </div>
+      <div class="ig" style="margin-bottom:8px"><label>ชื่อเจ้าของสวน (ตามบัตรประชาชน) *</label><input id="farm-owner" placeholder="ชื่อ-นามสกุล จริง"></div>
+      <div class="ig" style="margin-bottom:8px"><label>เบอร์โทรติดต่อ *</label><input id="farm-tel" placeholder="08x-xxx-xxxx" type="tel"></div>
+      <div class="irow">
+        <div class="ig"><label>เลขโฉนดที่ดิน *</label><input id="farm-deed" placeholder="เช่น 12345"></div>
+        <div class="ig"><label>เนื้อที่ (ไร่)</label><input id="farm-area" placeholder="10" type="number" inputmode="numeric"></div>
+      </div>
+      <div class="ig" style="margin-bottom:8px"><label>ที่ตั้งสวน (ตำบล/อำเภอ/จังหวัด) *</label><input id="farm-location" placeholder="เช่น ต.เนินสูง อ.โป่งน้ำร้อน จ.จันทบุรี"></div>
+      <div class="ig" style="margin-bottom:8px"><label>พันธุ์ทุเรียนในสวน</label><input id="farm-varieties" placeholder="เช่น หมอนทอง ชะนี กระดุม"></div>
+      <div class="ig"><label>รายละเอียดเพิ่มเติม</label><textarea id="farm-note" rows="2" placeholder="จำนวนต้น อายุต้น..."></textarea></div>
+      <div class="card" style="background:#fff9e0;border-color:var(--y);margin-top:8px">
+        <div style="font-size:11px;color:#5c3d11;line-height:1.9">⚠️ ไม่เก็บรูปโฉนด ปลอดภัยจาก PDPA<br>ถ้ามีการลงทะเบียนเลขโฉนดซ้ำ ระบบจะแจ้งเตือนทันที</div>
+      </div>
+      <button class="btn-main" onclick="submitFarmRegistration()" style="margin-top:10px">🏡 ลงทะเบียนสวน</button>
+    </div>
+
+    <button class="btn-sec" onclick="marketTab('sell')" style="margin-top:8px">ยกเลิก</button>
+    </div>
+
+    <!-- ลงทะเบียนทีมสายตัด -->
+    <div id="new-cutter-form" style="display:none">
+      <div class="card">
+        <div class="ctitle">✂️ ลงทะเบียนทีมสายตัด</div>
+        <div class="ig" style="margin-bottom:8px"><label>ชื่อทีมสายตัด *</label><input id="ct-teamname" placeholder="เช่น ทีมสายตัดเนินสูง"></div>
+        <div class="irow">
+          <div class="ig"><label>ชื่อหัวหน้าทีม *</label><input id="ct-leader" placeholder="ชื่อ-นามสกุล"></div>
+          <div class="ig"><label>เบอร์โทร *</label><input id="ct-tel" placeholder="08x-xxx-xxxx" type="tel"></div>
+        </div>
+        <div class="irow">
+          <div class="ig"><label>จังหวัดที่รับงาน *</label>
+            <select id="ct-province">
+              <option value="จันทบุรี">จ.จันทบุรี</option>
+              <option value="ระยอง">จ.ระยอง</option>
+              <option value="ตราด">จ.ตราด</option>
+              <option value="ชุมพร">จ.ชุมพร</option>
+              <option value="หลายจังหวัด">หลายจังหวัด</option>
+            </select>
+          </div>
+          <div class="ig"><label>อำเภอ/ตำบล</label><input id="ct-district" placeholder="เช่น เขาคิชฌกูฏ"></div>
+        </div>
+        <div class="ig" style="margin-bottom:8px">
+          <label>ประเภทงานที่รับ *</label>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
+            <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;background:#f0f8ff;padding:6px 12px;border-radius:20px;border:1.5px solid #90caf9"><input type="checkbox" id="ct-w-cut" checked> ✂️ รับตัด</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;background:#f0fff0;padding:6px 12px;border-radius:20px;border:1.5px solid #a5d6a7"><input type="checkbox" id="ct-w-buy"> 💰 รับซื้อในสวน</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;background:#fff8e1;padding:6px 12px;border-radius:20px;border:1.5px solid #ffe082"><input type="checkbox" id="ct-w-carry"> 🚛 รับขนส่ง</label>
+          </div>
+        </div>
+        <div class="ig" style="margin-bottom:8px"><label>ราคารับตัด / เงื่อนไข</label><input id="ct-price" placeholder="เช่น 3 บาท/กก."></div>
+        <div class="ig"><label>จำนวนคนในทีม</label><input id="ct-members" placeholder="เช่น 5 คน" type="number"></div>
+      </div>
+      <button class="btn-main" onclick="submitCutterRegister()">📤 ส่งคำขอลงทะเบียน</button>
+      <div style="font-size:11px;color:var(--dim);text-align:center;margin-top:8px">แอดมินจะอนุมัติภายใน 24-48 ชั่วโมง</div>
+      <button class="btn-sec" onclick="marketTab('cutter')">ยกเลิก</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: สัญญาในสวน -->
+<div class="page" id="pg-market">
+  <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:17px;color:var(--g);margin-bottom:12px">🛒 ตลาด</div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px">
+    <button onclick="marketTab('sell')" id="con-market" class="tab-btn on">🌳 หาคนเหมา</button>
+    <button onclick="marketTab('cutter')" id="con-cutter" class="tab-btn">✂️ สายตัด</button>
+    <button onclick="marketTab('mine')" id="con-mine" class="tab-btn">📄 ของฉัน</button>
+    <button onclick="marketTab('new')" id="con-new" class="tab-btn tab-btn-yellow">+ ประกาศหาคนเหมา</button>
+  </div>
+
+  <div id="con-sell-content">
     <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">สวนทุเรียนที่เปิดรับข้อเสนอจากล้ง/สายตัด</div>
-    <div id="contract-market-list"><div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศขาย</div></div></div>
+    <div id="contract-market-list"><div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศหาคนเหมา</div></div></div>
+  </div>
+
+  <!-- Cutter in Market -->
+  <div id="con-cutter-content" style="display:none">
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">ทีมรับตัด/รับซื้อในสวน เรียงตามพื้นที่ใกล้คุณ</div>
+    <div id="market-cutter-list"><div class="empty"><div class="empty-icon">✂️</div><div class="empty-text">ยังไม่มีทีมสายตัดในระบบ</div></div></div>
   </div>
 
   <div id="con-mine-content" style="display:none">
@@ -863,7 +1141,15 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
 
   <div id="con-new-content" style="display:none">
     <div class="card">
-      <div class="ctitle">🌳 ประกาศขายทุเรียนในสวน</div>
+      <!-- Post type toggle -->
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button onclick="setPostType('sell')" id="pt-sell" class="tab-btn on" style="flex:1">🌳 หาคนเหมาซื้อ</button>
+        <button onclick="setPostType('farm')" id="pt-farm" class="tab-btn" style="flex:1">🏡 ลงทะเบียนสวน</button>
+      </div>
+
+      <!-- SELL POST -->
+      <div id="pt-sell-form">
+      <div class="ctitle">🌳 ประกาศหาคนเหมาซื้อ</div>
       <div class="ig" style="margin-bottom:8px"><label>ชื่อเจ้าของสวน *</label><input id="con-owner" placeholder="ชื่อ-นามสกุล (ต้องตรงกับตัวจริง)"></div>
       <div class="ig" style="margin-bottom:8px"><label>เบอร์โทรติดต่อ *</label><input id="con-tel" placeholder="08x-xxx-xxxx" type="tel"></div>
       <div class="irow">
@@ -892,8 +1178,8 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);max
         • ข้อตกลงขั้นสุดท้ายต้องทำกระดาษอีกครั้ง
       </div>
     </div>
-    <button class="btn-main" onclick="submitContractListing()">📤 ประกาศขาย</button>
-    <button class="btn-sec" onclick="contractTab('market')">ยกเลิก</button>
+    <button class="btn-main" onclick="submitContractListing()">📤 ประกาศหาคนเหมา</button>
+    <button class="btn-sec" onclick="marketTab('contract')">ยกเลิก</button>
   </div>
 </div>
 
@@ -975,7 +1261,7 @@ const VAR_STYLE = {
   'หนามดำ':{bg:'#eceff1',border:'#607d8b',glow:false},
   'หลง/หลินลับแล':{bg:'#e0f7fa',border:'#00bcd4',glow:false},
 };
-const NEINSUG_LAT = 12.9419, NEINSUG_LNG = 102.0864;
+const NEINSUG_LAT = 12.5766, NEINSUG_LNG = 102.0640;
 
 // ===== STATE =====
 let currentUser = null;
@@ -1003,7 +1289,9 @@ document.addEventListener('firebase-ready', () => {
       currentUser = user;
       await loadUserData();
       showApp(user);
-    } else showLogin();
+    } else {
+      showGuestPage(); // แสดงหน้า Guest ก่อน ไม่ใช่หน้า Login ทันที
+    }
   });
 });
 
@@ -1022,7 +1310,20 @@ async function logoutUser() {
   await window._fb.signOut(window._auth);
 }
 
+function showGuestPage() {
+  document.getElementById('page-guest').style.display = 'block';
+  document.getElementById('page-login').style.display = 'none';
+  document.getElementById('app').style.display = 'none';
+  initGuestPage();
+}
+
+function showLoginFromGuest() {
+  document.getElementById('page-guest').style.display = 'none';
+  document.getElementById('page-login').style.display = 'block';
+}
+
 function showLogin() {
+  document.getElementById('page-guest').style.display = 'none';
   document.getElementById('page-login').style.display = 'block';
   document.getElementById('app').style.display = 'none';
 }
@@ -1042,6 +1343,7 @@ async function loadUserData() {
 }
 
 function showApp(user) {
+  document.getElementById('page-guest').style.display = 'none';
   document.getElementById('page-login').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   if (user.photoURL) {
@@ -1092,7 +1394,8 @@ function navTo(name) {
   if(name==='register') initRegMap();
   if(name==='announce') loadAnnounces();
   if(name==='cutter') cutterTab('board');
-  if(name==='contract') contractTab('market');
+  if(name==='market') marketTab('contract');
+  if(name==='market') marketTab('contract');
 }
 
 // ===== CHECK POST EXPIRED =====
@@ -1894,13 +2197,16 @@ async function submitCutterRegister() {
 }
 
 // ===== CONTRACT SYSTEM =====
-function contractTab(tab) {
-  ['market','mine','new'].forEach(t => {
-    document.getElementById('con-'+t+'-content').style.display = t===tab ? 'block' : 'none';
-    document.getElementById('con-'+t).classList.toggle('on', t===tab);
+function marketTab(tab) {
+  const tabs = ['sell','cutter','mine','new'];
+  const contents = {sell:'con-sell-content',cutter:'con-cutter-content',mine:'con-mine-content',new:'con-new-content'};
+  tabs.forEach(t => {
+    const el=document.getElementById('con-'+t); if(el) el.classList.toggle('on',t===tab);
+    const cel=document.getElementById(contents[t]); if(cel) cel.style.display=t===tab?'block':'none';
   });
-  if (tab === 'market') loadContractMarket();
-  if (tab === 'mine') loadMyContracts();
+  if(tab==='sell') loadContractMarket();
+  if(tab==='cutter') loadMarketCutters();
+  if(tab==='mine') loadMyContracts();
 }
 
 async function loadContractMarket() {
@@ -1909,7 +2215,7 @@ async function loadContractMarket() {
     const snap = await getDocs(query(collection(window._db,'contractListings'), where('status','==','open'), orderBy('createdAt','desc')));
     const c = document.getElementById('contract-market-list');
     if (snap.empty) {
-      c.innerHTML = '<div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศขาย<br>กด "+ ประกาศขาย" เพื่อเริ่มต้น</div></div>';
+      c.innerHTML = '<div class="empty"><div class="empty-icon">🌳</div><div class="empty-text">ยังไม่มีชาวสวนประกาศหาคนเหมา<br>กด "+ ประกาศหาคนเหมา" เพื่อเริ่มต้น</div></div>';
       return;
     }
     c.innerHTML = snap.docs.map(d => {
@@ -1948,7 +2254,7 @@ async function loadMyContracts() {
     const snap = await getDocs(query(collection(window._db,'contractListings'), where('uid','==',currentUser.uid), orderBy('createdAt','desc')));
     const c = document.getElementById('my-contracts-list');
     if (snap.empty) {
-      c.innerHTML = '<div class="empty"><div class="empty-icon">📄</div><div class="empty-text">ยังไม่มีสัญญาของคุณ<br>กด "+ ประกาศขาย" เพื่อเริ่มต้น</div></div>';
+      c.innerHTML = '<div class="empty"><div class="empty-icon">📄</div><div class="empty-text">ยังไม่มีสัญญาของคุณ<br>กด "+ ประกาศหาคนเหมา" เพื่อเริ่มต้น</div></div>';
       return;
     }
     const statusLabel = {open:'เปิดรับข้อเสนอ',negotiating:'กำลังเจรจา',signed:'✅ ทำสัญญาแล้ว',done:'เสร็จสิ้น',cancelled:'ยกเลิกแล้ว'};
@@ -1981,6 +2287,17 @@ async function submitContractListing() {
   const location = document.getElementById('con-location').value.trim();
   if (!ownerName || !location) { showToast('กรุณากรอกชื่อเจ้าของและที่ตั้งสวน','err'); return; }
   try {
+    // Check deed number duplicate
+    const deedNum = document.getElementById('con-deed').value.trim();
+    if(deedNum) {
+      const deedCheck = await getDocs(query(collection(window._db,'contractListings'), where('deedNumber','==',deedNum), where('status','in',['open','negotiating','signed'])));
+      if(!deedCheck.empty) {
+        const existing = deedCheck.docs[0].data();
+        showToast('⚠️ เลขโฉนดนี้มีสัญญาอยู่แล้ว! กรุณาตรวจสอบ','err');
+        alert('แจ้งเตือน: เลขโฉนด '+deedNum+' มีการทำสัญญาไว้แล้วกับ '+existing.ownerName+' กรุณาตรวจสอบก่อนดำเนินการต่อ');
+        return;
+      }
+    }
     // Check if user already has active listing
     const {collection, query, where, getDocs} = window._fb;
     const existing = await getDocs(query(collection(window._db,'contractListings'), where('uid','==',currentUser.uid), where('status','==','open')));
@@ -1990,6 +2307,7 @@ async function submitContractListing() {
       uid: currentUser.uid,
       displayName: currentUser.displayName,
       ownerName, tel, location,
+      deedNumber: document.getElementById('con-deed')?.value || '',
       variety: document.getElementById('con-variety').value,
       amount: document.getElementById('con-amount').value,
       harvest: document.getElementById('con-harvest').value,
@@ -1999,8 +2317,8 @@ async function submitContractListing() {
       status: 'open',
       createdAt: window._fb.serverTimestamp()
     });
-    showToast('✅ ประกาศขายแล้ว!');
-    contractTab('market');
+    showToast('✅ ประกาศหาคนเหมาแล้ว!');
+    marketTab('contract');
     ['con-owner','con-tel','con-location','con-amount','con-harvest','con-expect-price','con-deposit','con-note'].forEach(id=>document.getElementById(id).value='');
   } catch(e) { showToast('เกิดข้อผิดพลาด: '+e.message,'err'); }
 }
@@ -2158,6 +2476,200 @@ async function rejectCutter(reqId) {
     loadCutterRequests(); showToast('❌ ปฏิเสธแล้ว');
   } catch(e) { showToast('เกิดข้อผิดพลาด','err'); }
 }
+
+
+function setPostType(type) {
+  const sf=document.getElementById('pt-sell-form');
+  const ff=document.getElementById('pt-farm-form');
+  if(sf) sf.style.display=type==='sell'?'block':'none';
+  if(ff) ff.style.display=type==='farm'?'block':'none';
+  ['pt-sell','pt-farm'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',id==='pt-'+type);});
+}
+
+async function loadMarketCutters() {
+  try {
+    const {collection,query,where,getDocs,orderBy}=window._fb;
+    const snap=await getDocs(query(collection(window._db,'cutterTeams'),where('status','==','approved'),orderBy('createdAt','desc')));
+    const c=document.getElementById('market-cutter-list');
+    if(!c)return;
+    if(snap.empty){c.innerHTML='<div class="empty"><div class="empty-icon">✂️</div><div class="empty-text">ยังไม่มีทีมสายตัดในระบบ</div></div>';return;}
+    const teams=[];snap.forEach(d=>teams.push({id:d.id,...d.data()}));
+    const sorted=[...teams.filter(t=>t.province==='จันทบุรี'&&t.district),...teams.filter(t=>t.province==='จันทบุรี'&&!t.district),...teams.filter(t=>t.province!=='จันทบุรี')];
+    const wl={workCut:'✂️ รับตัด',workBuy:'💰 รับซื้อ',workCarry:'🚛 ขนส่ง'};
+    c.innerHTML=sorted.map(p=>{
+      const works=Object.keys(wl).filter(w=>p[w]).map(w=>wl[w]);
+      const isNear=p.province==='จันทบุรี';
+      return `<div class="cutter-card" style="${isNear?'border-color:var(--gl)':''}">
+        <div class="cutter-hdr" style="${isNear?'background:linear-gradient(90deg,var(--gd),var(--g))':''}">
+          <div class="cutter-name">✂️ ${p.teamName}</div>
+          ${isNear?'<span class="cutter-type-badge">📍 ใกล้ฉัน</span>':'<span class="cutter-type-badge">✅ ยืนยัน</span>'}
+        </div>
+        <div class="cutter-body">👤 ${p.leaderName}<br>📍 ${p.province}${p.district?'/'+p.district:''}<br>💰 ${p.price||'ตกลงราคา'}
+          <div class="work-tags">${works.map(w=>`<span class="work-tag">${w}</span>`).join('')}</div>
+        </div>
+        <div class="cutter-acts">
+          <button class="pa" style="flex:1;background:#e3f2fd;border:1.5px solid #2196f3;color:#1565c0;padding:7px 4px;border-radius:8px;font-family:'Kanit',sans-serif;font-size:12px;font-weight:700;cursor:pointer" onclick="window.open('tel:${p.tel}')">📞 โทรหา</button>
+          <button class="pa pa-q" style="flex:1" onclick="openReviewModal('${p.id}','cutter','${(p.teamName||'').replace(/'/g,"\\'")}')">⭐ รีวิว</button>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(e){console.log('marketCutters err',e);}
+}
+
+async function submitFarmRegistration() {
+  const owner=document.getElementById('farm-owner')?.value.trim();
+  const tel=document.getElementById('farm-tel')?.value.trim();
+  const deed=document.getElementById('farm-deed')?.value.trim();
+  const location=document.getElementById('farm-location')?.value.trim();
+  if(!owner||!tel||!deed||!location){showToast('กรุณากรอกข้อมูลที่จำเป็น','err');return;}
+  try{
+    const {collection,query,where,getDocs,addDoc}=window._fb;
+    const existing=await getDocs(query(collection(window._db,'farms'),where('deedNumber','==',deed)));
+    if(!existing.empty){
+      await addDoc(collection(window._db,'suspiciousRegistrations'),{
+        newUid:currentUser.uid,newName:currentUser.displayName,
+        existingOwnerId:existing.docs[0].data().uid,
+        deedNumber:deed,createdAt:window._fb.serverTimestamp()
+      });
+      showToast('⚠️ เลขโฉนดนี้มีการลงทะเบียนแล้ว! แจ้งเตือนเจ้าของสวนแล้ว','warn');
+      return;
+    }
+    const myFarm=await getDocs(query(collection(window._db,'farms'),where('uid','==',currentUser.uid)));
+    if(!myFarm.empty){showToast('คุณลงทะเบียนสวนไว้แล้ว','warn');return;}
+    await addDoc(collection(window._db,'farms'),{
+      uid:currentUser.uid,displayName:currentUser.displayName,
+      ownerName:owner,tel,deedNumber:deed,
+      area:document.getElementById('farm-area')?.value||'',
+      location,
+      varieties:document.getElementById('farm-varieties')?.value||'',
+      note:document.getElementById('farm-note')?.value||'',
+      status:'registered',createdAt:window._fb.serverTimestamp()
+    });
+    showToast('✅ ลงทะเบียนสวนแล้ว!');
+    ['farm-owner','farm-tel','farm-deed','farm-area','farm-location','farm-varieties','farm-note'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    marketTab('sell');
+  }catch(e){showToast('เกิดข้อผิดพลาด: '+e.message,'err');}
+}
+
+
+// ===== GUEST PAGE =====
+async function initGuestPage() {
+  // Set date
+  const now = new Date();
+  document.getElementById('guest-date').textContent =
+    '📅 ' + now.toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  try {
+    const {collection, query, orderBy, getDocs} = window._fb;
+
+    // Load posts for price calculation
+    const snap = await getDocs(query(collection(window._db,'posts'), orderBy('createdAt','desc')));
+    const posts = [];
+    snap.forEach(d => {
+      const p = {id:d.id,...d.data()};
+      if (!isExpiredGuest(p)) posts.push(p);
+    });
+
+    // Calc avg หมอนทอง AB
+    const ab = posts.flatMap(p =>
+      Object.entries(p.varieties||{})
+        .filter(([v]) => v==='หมอนทอง')
+        .flatMap(([,gs]) => gs.filter(g=>g.grade==='AB').map(g=>parseFloat(g.price)))
+    ).filter(x=>x>0);
+
+    document.getElementById('guest-src').textContent = posts.length + ' ล้ง';
+
+    if (ab.length > 0) {
+      const avg = Math.round(ab.reduce((a,b)=>a+b,0)/ab.length);
+      document.getElementById('guest-avg').textContent = avg;
+      document.getElementById('guest-max').textContent = '⬆ สูงสุด ' + Math.max(...ab);
+      document.getElementById('guest-min').textContent = '⬇ ต่ำสุด ' + Math.min(...ab);
+    } else {
+      document.getElementById('guest-avg').textContent = '—';
+    }
+
+    // Preview posts (แสดง 3 อัน แต่ซ่อนข้อมูลบางส่วน)
+    renderGuestPosts(posts.slice(0, 3));
+
+    // Load latest announce
+    const annSnap = await getDocs(query(collection(window._db,'announces'), orderBy('createdAt','desc')));
+    if (!annSnap.empty) {
+      const a = annSnap.docs[0].data();
+      document.getElementById('guest-ann').style.display = 'block';
+      document.getElementById('guest-ann-title').textContent = a.title || 'ประกาศจากแอดมิน';
+      document.getElementById('guest-ann-body').textContent = a.text || '—';
+      document.getElementById('guest-ann-time').textContent = a.createdAt ?
+        new Date(a.createdAt.seconds*1000).toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})+' น.' : '';
+    }
+
+  } catch(e) { console.log('Guest init error:', e); }
+}
+
+function isExpiredGuest(p) {
+  if (!p.createdAt) return false;
+  const created = new Date(p.createdAt.seconds*1000), now = new Date();
+  const reset = new Date(); reset.setHours(6,0,0,0);
+  if (created < reset && now >= reset) return true;
+  return (now - created) > 24*60*60*1000;
+}
+
+function renderGuestPosts(posts) {
+  const c = document.getElementById('guest-posts-preview');
+  document.getElementById('guest-post-count').textContent = posts.length + ' ล้ง โพสราคาวันนี้';
+
+  if (!posts.length) {
+    c.innerHTML = '<div class="empty"><div class="empty-icon">🏭</div><div class="empty-text" style="font-size:12px">ยังไม่มีล้งโพสราคา</div></div>';
+    return;
+  }
+
+  const GCOL = {AB:'#1a5c1a',C:'#1565c0',D:'#e65100',ตซ:'#6a1b9a',เล็ก:'#37474f',ล่าง:'#b71c1c',หนอน:'#4e342e'};
+  const VAR_BG = {'หมอนทอง':'#e8f5e9','ชะนี':'#f3e5f5','กระดุม':'#fff3e0','ก้านยาว':'#e3f2fd','พวงมณี':'#fce4ec','นกหยิบ':'#ffebee','หนามดำ':'#eceff1'};
+  const VAR_BORDER = {'หมอนทอง':'#f5c518','ชะนี':'#9c27b0','กระดุม':'#ff9800','ก้านยาว':'#2196f3','พวงมณี':'#e91e63','นกหยิบ':'#f44336','หนามดำ':'#607d8b'};
+
+  c.innerHTML = posts.map((p, pi) => {
+    const t = p.createdAt ? new Date(p.createdAt.seconds*1000).toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})+' น.' : '—';
+    const logoHtml = p.logoUrl ? `<img src="${p.logoUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:10px">` : '🏭';
+    let varHtml = '';
+    Object.entries(p.varieties||{}).forEach(([vName, grades]) => {
+      const bg = VAR_BG[vName] || '#f1f8e9';
+      const border = VAR_BORDER[vName] || '#f5c518';
+      const glow = vName==='หมอนทอง' ? 'box-shadow:0 0 10px rgba(245,197,24,.4)' : '';
+      varHtml += `<div style="border:2px solid ${border};border-radius:10px;padding:8px 10px;margin-bottom:6px;background:${bg};${glow}">
+        <div style="font-family:'Kanit',sans-serif;font-weight:800;font-size:13px;margin-bottom:6px">${vName==='หมอนทอง'?'🌟':'🌳'} ${vName}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          ${grades.map(g=>`<div style="background:rgba(255,255,255,.7);border-radius:8px;padding:5px 8px;min-width:58px;text-align:center">
+            <span style="font-family:'Kanit',sans-serif;font-size:10px;font-weight:900;color:white;background:${GCOL[g.grade]||'#555'};padding:1px 6px;border-radius:20px;display:block;margin-bottom:2px">${g.grade}</span>
+            <span style="font-family:'Kanit',sans-serif;font-size:16px;font-weight:900">${g.price}</span>
+            <span style="font-size:9px;color:#888;display:block">${g.kgMin&&g.kgMax?g.kgMin+'-'+g.kgMax+' กก.':'บ./กก.'}</span>
+          </div>`).join('')}
+        </div>
+      </div>`;
+    });
+
+    // ซ่อนเบอร์โทรและปุ่มบางอัน
+    const isBlurred = pi >= 2; // post 3+ ให้ blurred
+    return `<div class="guest-post-card" style="${isBlurred?'max-height:180px;overflow:hidden;':''}">
+      <div style="padding:10px 14px;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:10px">
+        <div style="width:40px;height:40px;border-radius:10px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden;flex-shrink:0">${logoHtml}</div>
+        <div style="flex:1">
+          <div style="font-family:'Kanit',sans-serif;font-weight:700;font-size:14px">${p.shopName||'—'}</div>
+          <div style="font-size:11px;color:#aaa">⏰ ${p.openTime||'—'} | ${t}</div>
+        </div>
+      </div>
+      <div style="padding:10px 14px">${varHtml}</div>
+      <div style="padding:8px 14px;border-top:1px solid #f5f5f5;display:flex;gap:7px">
+        <button onclick="showLoginFromGuest()" style="flex:1;padding:7px 4px;border-radius:8px;background:#f5f5f5;border:1.5px solid #ddd;color:#aaa;font-family:'Kanit',sans-serif;font-size:12px;font-weight:700;cursor:pointer">🔐 ล็อกอินเพื่อนำทาง</button>
+        <button onclick="showLoginFromGuest()" style="flex:1;padding:7px 4px;border-radius:8px;background:#fff3e0;border:1.5px solid #ffb74d;color:#e65100;font-family:'Kanit',sans-serif;font-size:12px;font-weight:700;cursor:pointer">🔐 ล็อกอินเพื่อจองคิว</button>
+      </div>
+      ${isBlurred?`<div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.98));display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px">
+        <button onclick="showLoginFromGuest()" style="background:var(--g);border:none;color:white;font-family:'Kanit',sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:20px;cursor:pointer">🌿 ล็อกอินเพื่อดูทั้งหมด</button>
+      </div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ===== FIX หาคนเหมาซื้อ → หาคนเหมา =====
+// (handled in HTML already, but fix any remaining JS references)
 
 </script>
 
